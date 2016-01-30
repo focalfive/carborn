@@ -1,0 +1,61 @@
+{
+  "name": "carborn",
+  "version": "1.0.0",
+  "description": "carborn scrapper",
+  "main": "views/index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slowslipper/carborn.git"
+  },
+  "author": "slowslipper",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "1.7.2",
+    "del": "2.2.0",
+    "gulp": "3.9.0",
+    "gulp-concat": "2.6.0",
+    "gulp-cssnano": "2.1.0",
+    "gulp-react": "3.1.0",
+    "gulp-uglify": "1.5.1",
+    "gulp-webserver": "0.9.1"
+  },
+  "paths": {
+    "libs": [
+      "./bower_components/jquery/dist/jquery.min.js",
+      "./bower_components/jquery/dist/jquery.min.map",
+      "./bower_components/jquery.easing/js/jquery.easing.min.js",
+      "./bower_components/react/react.min.js",
+      "./bower_components/react/react-dom.min.js",
+      "./bower_components/requirejs/require.js",
+      "./bower_components/bootstrap/dist/js/bootstrap.min.js",
+      "./bower_components/bootstrap/dist/css/bootstrap.min.css",
+      "./bower_components/bootstrap/dist/css/bootstrap.min.css.map"
+    ],
+    "fonts": [
+      "./bower_components/bootstrap/dist/fonts/*.*"
+    ],
+    "src": {
+      "images": [
+        "./src/assets/**/*.jpg",
+        "./src/assets/**/*.gif",
+        "./src/assets/**/*.png",
+        "./src/assets/**/*.svg"
+      ],
+      "css": "./src/css/**/*.css",
+      "js": "./src/js/**/*.js",
+      "jsx": "./src/jsx/**/*.jsx",
+      "html": "./src/html/**/*.html"
+    },
+    "dest": {
+      "images": "build/images",
+      "css": "build/css",
+      "libs": "build/libs",
+      "fonts": "build/fonts",
+      "js": "build/js",
+      "html": "build"
+    }
+  }
+}
