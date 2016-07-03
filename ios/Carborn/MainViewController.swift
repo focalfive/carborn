@@ -125,10 +125,10 @@ class MainViewController : UIViewController {
                         }
                         self.currentVersionNumber = versionNumber
                         NSUserDefaults.standardUserDefaults().setInteger(versionNumber, forKey: "VersionNumber")
-						
-						dispatch_async(dispatch_get_main_queue()) {
-							self.navigateToCarList()
-						}
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.navigateToCarList()
                     }
                     
                 } catch {
