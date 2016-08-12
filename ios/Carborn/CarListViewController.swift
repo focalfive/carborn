@@ -17,6 +17,10 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
     let carListView = UIScrollView()
 	let dbResults: Results<Car> = try! Realm().objects(Car).sorted("maker", ascending: true)
     var collection: Dictionary<String, [Car]> = Dictionary<String, [Car]>()
+    var currentSectionIndex = 0
+    var currentIndex = 0
+    var makerListScrolling = false
+    var carListScrolling = false
     
     var viewSize: CGSize {
         get {
@@ -111,19 +115,100 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
         
         self.carListView.contentSize = CGSizeMake(contentWidth, self.carSize.height)
     }
+    
+    func getSectionIndex(index: Int) -> Int {
+        var length = 0
+        var sectionIndex = 0
+        for (_, model) in self.collection {
+            length += model.count
+            if index < length {
+                return sectionIndex
+            }
+            sectionIndex += 1
+        }
+        return -1
+    }
+    
+    func getIndex(sectionIndex: Int, isNext: Bool = true) -> Int {
+        var length = 0
+        var index = 0
+        for (_, model) in self.collection {
+            if index == sectionIndex {
+                if isNext {
+                    return length
+                } else {
+                    return length + model.count - 1
+                }
+            }
+            length += model.count
+            index += 1
+        }
+        return 0
+    }
+    
+    func scrollSectionPage(index: Int) {
+        let x = CGFloat(index) * self.makerSize.width
+        self.makerListView.setContentOffset(CGPointMake(x, 0.0), animated: true)
+    }
+    
+    func scrollPage(index: Int) {
+        let x = CGFloat(index) * self.carSize.width
+        self.carListView.setContentOffset(CGPointMake(x, 0.0), animated: true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         if scrollView.isEqual(self.makerListView) {
-            let index = scrollView.contentOffset.x / self.makerSize.width
-            print("maker scroll", scrollView.contentOffset, index)
+            self.makerListScrolling = true
+            self.carListScrolling = false
         } else if scrollView.isEqual(self.carListView) {
-            let index = round(scrollView.contentOffset.x / self.carSize.width)
-            print("car scroll", scrollView.contentOffset, index)
+            self.carListScrolling = true
+            self.makerListScrolling = false
+        }
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.makerListScrolling = false
+            self.carListScrolling = false
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        self.makerListScrolling = false
+        self.carListScrolling = false
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if self.makerListScrolling && scrollView.isEqual(self.makerListView) {
+            let sectionIndex = Int(scrollView.contentOffset.x / self.makerSize.width)
+            if sectionIndex != self.currentSectionIndex {
+//                print("Set section index from", self.currentSectionIndex, sectionIndex)
+                let isNext = self.currentSectionIndex < sectionIndex
+                self.currentSectionIndex = sectionIndex
+                let index = self.getIndex(sectionIndex, isNext: isNext)
+                if index != self.currentIndex {
+//                    print("Set index from", self.currentIndex, index, "at section scroll")
+                    self.currentIndex = index
+                    self.scrollPage(index)
+                }
+            }
+        } else if self.carListScrolling && scrollView.isEqual(self.carListView) {
+            let index = Int(round(scrollView.contentOffset.x / self.carSize.width))
+            if index != self.currentIndex {
+//                print("Set index from", self.currentIndex, index)
+                self.currentIndex = index
+                let sectionIndex = self.getSectionIndex(index)
+                if sectionIndex != self.currentSectionIndex {
+//                    print("Set section index from", self.currentSectionIndex, sectionIndex, "at scroll")
+                    self.currentSectionIndex = sectionIndex
+                    self.scrollSectionPage(sectionIndex)
+                }
+            }
         }
     }
 
