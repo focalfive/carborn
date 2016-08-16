@@ -12,11 +12,17 @@ import RealmSwift
 class CarListViewController: UIViewController, UIScrollViewDelegate {
     
     var makerSize = CGSizeMake(100, 100)
-    var carSize = CGSizeMake(100, 100)
+    var carSize = CGSizeMake(300, 300)
     let makerListView = UIScrollView()
     let carListView = UIScrollView()
 	let dbResults: Results<Car> = try! Realm().objects(Car).sorted("maker", ascending: true)
     var collection: Dictionary<String, [Car]> = Dictionary<String, [Car]>()
+    
+    var viewSize: CGSize {
+        get {
+            return self.view.bounds.size
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +39,7 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
         
         self.view.backgroundColor = UIColor.whiteColor()
         
-        let viewSize = self.view.bounds.size
+        let viewSize = self.viewSize
         self.makerSize.width = viewSize.width
         var frame = CGRectZero
         let headerHeight = UIApplication.sharedApplication().statusBarFrame.size.height + self.navigationController!.navigationBar.bounds.size.height
@@ -48,20 +54,23 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
         self.makerListView.pagingEnabled = true
         self.makerListView.showsVerticalScrollIndicator = false
         self.makerListView.showsHorizontalScrollIndicator = false
+        self.makerListView.backgroundColor = UIColor.redColor()
         self.makerListView.delegate = self
         self.view.addSubview(self.makerListView)
         
         // Car list
-//        frame.origin.x = (viewSize.width - self.carSize.width) * 0.5
-        frame.origin.y += 20
-//        frame.size.width = self.carSize.width
-        frame.size.width = viewSize.width
+        frame.origin.x = (viewSize.width - self.carSize.width) * 0.5
+        frame.origin.y += frame.size.height
+        frame.size.width = self.carSize.width
+//        frame.size.width = viewSize.width
         frame.size.height = self.carSize.height
         
         self.carListView.frame = frame
-//        self.carListView.pagingEnabled = true
+        self.carListView.clipsToBounds = false
+        self.carListView.pagingEnabled = true
         self.carListView.showsVerticalScrollIndicator = false
         self.carListView.showsHorizontalScrollIndicator = false
+        self.carListView.backgroundColor = UIColor.blueColor()
         self.carListView.delegate = self
         self.view.addSubview(self.carListView)
         
@@ -87,6 +96,8 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func initCarData() {
+//        let viewSize = self.viewSize
+//        var contentWidth = CGFloat(viewSize.width - self.carSize.width) * 0.5
         var contentWidth = CGFloat(0)
         for (_, cars) in self.collection {
             for car in cars {
@@ -98,7 +109,7 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
             }
         }
         
-        self.makerListView.contentSize = CGSizeMake(contentWidth, self.carSize.height)
+        self.carListView.contentSize = CGSizeMake(contentWidth, self.carSize.height)
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,7 +118,13 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        print("scroll", scrollView.contentOffset)
+        if scrollView.isEqual(self.makerListView) {
+            let index = scrollView.contentOffset.x / self.makerSize.width
+            print("maker scroll", scrollView.contentOffset, index)
+        } else if scrollView.isEqual(self.carListView) {
+            let index = round(scrollView.contentOffset.x / self.carSize.width)
+            print("car scroll", scrollView.contentOffset, index)
+        }
     }
 
 }
