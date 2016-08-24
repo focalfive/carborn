@@ -58,7 +58,7 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
         self.makerListView.pagingEnabled = true
         self.makerListView.showsVerticalScrollIndicator = false
         self.makerListView.showsHorizontalScrollIndicator = false
-        self.makerListView.backgroundColor = UIColor.redColor()
+//        self.makerListView.backgroundColor = UIColor.redColor()
         self.makerListView.delegate = self
         self.view.addSubview(self.makerListView)
         
@@ -71,10 +71,10 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
         
         self.carListView.frame = frame
         self.carListView.clipsToBounds = false
-        self.carListView.pagingEnabled = true
+//        self.carListView.pagingEnabled = true
         self.carListView.showsVerticalScrollIndicator = false
         self.carListView.showsHorizontalScrollIndicator = false
-        self.carListView.backgroundColor = UIColor.blueColor()
+//        self.carListView.backgroundColor = UIColor.blueColor()
         self.carListView.delegate = self
         self.view.addSubview(self.carListView)
         
@@ -91,7 +91,8 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
         for makerName in self.collection.keys {
             let makerLabel = UILabel(frame: CGRectMake(contentWidth, 0, self.makerSize.width, self.makerSize.height))
             makerLabel.textAlignment = .Center
-            makerLabel.text = makerName
+            makerLabel.text = makerName.uppercaseString
+            makerLabel.font = UIFont(name: "AvenirNextCondensed-UltraLight", size: 48)
             self.makerListView.addSubview(makerLabel)
             contentWidth += self.makerSize.width
         }
@@ -105,15 +106,28 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
         var contentWidth = CGFloat(0)
         for (_, cars) in self.collection {
             for car in cars {
-                let carLabel = UILabel(frame: CGRectMake(contentWidth, 0, self.carSize.width, self.carSize.height))
-                carLabel.textAlignment = .Center
-                carLabel.text = car.model
-                self.carListView.addSubview(carLabel)
+                let carItemView = CarItemView(frame: CGRectMake(contentWidth, 0, self.carSize.width, self.carSize.height))
+                carItemView.data = car
+                carItemView.userInteractionEnabled = true
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+                carItemView.addGestureRecognizer(tapGesture)
+                self.carListView.addSubview(carItemView)
                 contentWidth += self.carSize.width
             }
         }
         
         self.carListView.contentSize = CGSizeMake(contentWidth, self.carSize.height)
+    }
+    
+    func handleTap(sender:UIGestureRecognizer) {
+        guard let carItemView = sender.view as? CarItemView else {
+            return
+        }
+        
+        print("handleTap", carItemView.data.model)
+        let detailViewController = CarDetailViewController()
+        detailViewController.model = carItemView.data
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func getSectionIndex(index: Int) -> Int {
