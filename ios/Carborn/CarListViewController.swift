@@ -71,7 +71,7 @@ class CarListViewController: UIViewController, UIScrollViewDelegate {
         
         self.carListView.frame = frame
         self.carListView.clipsToBounds = false
-//        self.carListView.pagingEnabled = true
+        self.carListView.pagingEnabled = true
         self.carListView.showsVerticalScrollIndicator = false
         self.carListView.showsHorizontalScrollIndicator = false
 //        self.carListView.backgroundColor = UIColor.blueColor()
