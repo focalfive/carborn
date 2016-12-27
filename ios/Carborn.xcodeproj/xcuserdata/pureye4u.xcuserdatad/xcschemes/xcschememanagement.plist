@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Carborn.xcscheme</key>
+		<key>carborn.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>65A6BD5C1CFAD181000B64EF</key>
+		<key>652728BF1E12684500B89903</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>652728D31E12684600B89903</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>652728DE1E12684600B89903</key>
 		<dict>
 			<key>primary</key>
 			<true/>

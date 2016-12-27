@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65A6BD5C1CFAD181000B64EF"
-               BuildableName = "Carborn.app"
-               BlueprintName = "Carborn"
-               ReferencedContainer = "container:Carborn.xcodeproj">
+               BlueprintIdentifier = "652728BF1E12684500B89903"
+               BuildableName = "carborn.app"
+               BlueprintName = "carborn"
+               ReferencedContainer = "container:carborn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,14 +28,34 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "652728D31E12684600B89903"
+               BuildableName = "carbornTests.xctest"
+               BlueprintName = "carbornTests"
+               ReferencedContainer = "container:carborn.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "652728DE1E12684600B89903"
+               BuildableName = "carbornUITests.xctest"
+               BlueprintName = "carbornUITests"
+               ReferencedContainer = "container:carborn.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65A6BD5C1CFAD181000B64EF"
-            BuildableName = "Carborn.app"
-            BlueprintName = "Carborn"
-            ReferencedContainer = "container:Carborn.xcodeproj">
+            BlueprintIdentifier = "652728BF1E12684500B89903"
+            BuildableName = "carborn.app"
+            BlueprintName = "carborn"
+            ReferencedContainer = "container:carborn.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,10 +75,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65A6BD5C1CFAD181000B64EF"
-            BuildableName = "Carborn.app"
-            BlueprintName = "Carborn"
-            ReferencedContainer = "container:Carborn.xcodeproj">
+            BlueprintIdentifier = "652728BF1E12684500B89903"
+            BuildableName = "carborn.app"
+            BlueprintName = "carborn"
+            ReferencedContainer = "container:carborn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -74,10 +94,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65A6BD5C1CFAD181000B64EF"
-            BuildableName = "Carborn.app"
-            BlueprintName = "Carborn"
-            ReferencedContainer = "container:Carborn.xcodeproj">
+            BlueprintIdentifier = "652728BF1E12684500B89903"
+            BuildableName = "carborn.app"
+            BlueprintName = "carborn"
+            ReferencedContainer = "container:carborn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
