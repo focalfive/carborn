@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		652728C41E12684500B89903 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652728C31E12684500B89903 /* AppDelegate.swift */; };
-		652728C61E12684500B89903 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652728C51E12684500B89903 /* ViewController.swift */; };
+		652728C61E12684500B89903 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652728C51E12684500B89903 /* MainViewController.swift */; };
 		652728CB1E12684500B89903 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652728CA1E12684500B89903 /* Assets.xcassets */; };
 		652728CE1E12684500B89903 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652728CC1E12684500B89903 /* LaunchScreen.storyboard */; };
 		652728D91E12684600B89903 /* carbornTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652728D81E12684600B89903 /* carbornTests.swift */; };
 		652728E41E12684600B89903 /* carbornUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652728E31E12684600B89903 /* carbornUITests.swift */; };
+		6545779A1E126E1100F8E1E8 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654577991E126E1100F8E1E8 /* IntroViewController.swift */; };
 		83E64DB541207FF065D8276A /* Pods_carbornUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612D1AED118D27FFFCF79BF /* Pods_carbornUITests.framework */; };
 		CF4A6ED4AE22655FA63E4F8A /* Pods_carborn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0D92470FA538C7EE7F4AA4 /* Pods_carborn.framework */; };
 		FADB0324734D4C707FE16AC5 /* Pods_carbornTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53B0F7670C46A91E632583D2 /* Pods_carbornTests.framework */; };
@@ -42,7 +43,7 @@
 		548D9ECE5E92ABF63D9EFB24 /* Pods-carbornUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbornUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-carbornUITests/Pods-carbornUITests.release.xcconfig"; sourceTree = "<group>"; };
 		652728C01E12684500B89903 /* carborn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = carborn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652728C31E12684500B89903 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		652728C51E12684500B89903 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		652728C51E12684500B89903 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		652728CA1E12684500B89903 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		652728CD1E12684500B89903 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		652728CF1E12684500B89903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +53,8 @@
 		652728DF1E12684600B89903 /* carbornUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = carbornUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		652728E31E12684600B89903 /* carbornUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = carbornUITests.swift; sourceTree = "<group>"; };
 		652728E51E12684600B89903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		654577991E126E1100F8E1E8 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		6545779B1E12713E00F8E1E8 /* carborn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "carborn-Bridging-Header.h"; sourceTree = "<group>"; };
 		7F47E6CC36B1368A9919E8F2 /* Pods-carborn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carborn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carborn/Pods-carborn.debug.xcconfig"; sourceTree = "<group>"; };
 		8ED8CA41C3E62483F6FFBC82 /* Pods-carbornTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbornTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carbornTests/Pods-carbornTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0D92470FA538C7EE7F4AA4 /* Pods_carborn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_carborn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,10 +129,12 @@
 			isa = PBXGroup;
 			children = (
 				652728C31E12684500B89903 /* AppDelegate.swift */,
-				652728C51E12684500B89903 /* ViewController.swift */,
+				652728C51E12684500B89903 /* MainViewController.swift */,
+				654577991E126E1100F8E1E8 /* IntroViewController.swift */,
 				652728CA1E12684500B89903 /* Assets.xcassets */,
 				652728CC1E12684500B89903 /* LaunchScreen.storyboard */,
 				652728CF1E12684500B89903 /* Info.plist */,
+				6545779B1E12713E00F8E1E8 /* carborn-Bridging-Header.h */,
 			);
 			path = carborn;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 					652728BF1E12684500B89903 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = DJJ7L7SWLK;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					652728D31E12684600B89903 = {
@@ -443,7 +449,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				652728C61E12684500B89903 /* ViewController.swift in Sources */,
+				6545779A1E126E1100F8E1E8 /* IntroViewController.swift in Sources */,
+				652728C61E12684500B89903 /* MainViewController.swift in Sources */,
 				652728C41E12684500B89903 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,12 +594,15 @@
 			baseConfigurationReference = 7F47E6CC36B1368A9919E8F2 /* Pods-carborn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DJJ7L7SWLK;
 				INFOPLIST_FILE = carborn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slowslipper.carborn.carborn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "carborn/carborn-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -602,12 +612,14 @@
 			baseConfigurationReference = 0BC9ACC6493DAAC4DCC82E27 /* Pods-carborn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DJJ7L7SWLK;
 				INFOPLIST_FILE = carborn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slowslipper.carborn.carborn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "carborn/carborn-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
