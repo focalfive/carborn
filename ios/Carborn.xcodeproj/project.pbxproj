@@ -14,6 +14,7 @@
 		652728D91E12684600B89903 /* carbornTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652728D81E12684600B89903 /* carbornTests.swift */; };
 		652728E41E12684600B89903 /* carbornUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652728E31E12684600B89903 /* carbornUITests.swift */; };
 		6545779A1E126E1100F8E1E8 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654577991E126E1100F8E1E8 /* IntroViewController.swift */; };
+		65A14FC21E1944870035310A /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A14FC11E1944870035310A /* AppInfo.swift */; };
 		83E64DB541207FF065D8276A /* Pods_carbornUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612D1AED118D27FFFCF79BF /* Pods_carbornUITests.framework */; };
 		CF4A6ED4AE22655FA63E4F8A /* Pods_carborn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0D92470FA538C7EE7F4AA4 /* Pods_carborn.framework */; };
 		FADB0324734D4C707FE16AC5 /* Pods_carbornTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53B0F7670C46A91E632583D2 /* Pods_carbornTests.framework */; };
@@ -55,6 +56,7 @@
 		652728E51E12684600B89903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		654577991E126E1100F8E1E8 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		6545779B1E12713E00F8E1E8 /* carborn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "carborn-Bridging-Header.h"; sourceTree = "<group>"; };
+		65A14FC11E1944870035310A /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppInfo.swift; path = Carborn/AppInfo.swift; sourceTree = SOURCE_ROOT; };
 		7F47E6CC36B1368A9919E8F2 /* Pods-carborn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carborn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carborn/Pods-carborn.debug.xcconfig"; sourceTree = "<group>"; };
 		8ED8CA41C3E62483F6FFBC82 /* Pods-carbornTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbornTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carbornTests/Pods-carbornTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0D92470FA538C7EE7F4AA4 /* Pods_carborn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_carborn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 				652728C31E12684500B89903 /* AppDelegate.swift */,
 				652728C51E12684500B89903 /* MainViewController.swift */,
 				654577991E126E1100F8E1E8 /* IntroViewController.swift */,
+				65A14FC11E1944870035310A /* AppInfo.swift */,
 				652728CA1E12684500B89903 /* Assets.xcassets */,
 				652728CC1E12684500B89903 /* LaunchScreen.storyboard */,
 				652728CF1E12684500B89903 /* Info.plist */,
@@ -260,7 +263,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 652728BB1E12684500B89903 /* Build configuration list for PBXProject "carborn" */;
+			buildConfigurationList = 652728BB1E12684500B89903 /* Build configuration list for PBXProject "Carborn" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -450,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6545779A1E126E1100F8E1E8 /* IntroViewController.swift in Sources */,
+				65A14FC21E1944870035310A /* AppInfo.swift in Sources */,
 				652728C61E12684500B89903 /* MainViewController.swift in Sources */,
 				652728C41E12684500B89903 /* AppDelegate.swift in Sources */,
 			);
@@ -631,6 +635,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = carbornTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slowslipper.carborn.carbornTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -646,6 +651,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = carbornTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slowslipper.carborn.carbornTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -660,6 +666,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = carbornUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slowslipper.carborn.carbornUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -674,6 +681,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = carbornUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slowslipper.carborn.carbornUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -685,7 +693,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		652728BB1E12684500B89903 /* Build configuration list for PBXProject "carborn" */ = {
+		652728BB1E12684500B89903 /* Build configuration list for PBXProject "Carborn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				652728E61E12684600B89903 /* Debug */,
