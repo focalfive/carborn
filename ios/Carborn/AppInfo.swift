@@ -65,6 +65,36 @@ struct Version {
             return major * 100000000 + minor * 10000 + build
         }
     }
+    static func <(lhs: Version, rhs: Version) -> Bool {
+        return lhs.number < rhs.number
+    }
+    static func <=(lhs: Version, rhs: Version) -> Bool {
+        return lhs.number <= rhs.number
+    }
+    static func >(lhs: Version, rhs: Version) -> Bool {
+        return lhs.number > rhs.number
+    }
+    static func >=(lhs: Version, rhs: Version) -> Bool {
+        return lhs.number >= rhs.number
+    }
+    static func ==(lhs: Version, rhs: Version) -> Bool {
+        return lhs.number == rhs.number
+    }
+    static var maxValue: Version {
+        get {
+            var version = Version()
+            version.major = 9999
+            version.minor = 9999
+            version.build = 9999
+            
+            return version
+        }
+    }
+    static var minValue: Version {
+        get {
+            return Version()
+        }
+    }
 }
 
 class AppInfo {
@@ -77,28 +107,6 @@ class AppInfo {
             let release = info["CFBundleShortVersionString"] as? String
             let build = info["CFBundleVersion"] as? String
             return Version(releaseString: release, buildString: build)
-//            var _version = Version()
-//            guard let info = Bundle.main.infoDictionary else {
-//                return _version
-//            }
-//            if let releaseVersionString = info["CFBundleShortVersionString"] as? String {
-//                let releaseVersionArray = releaseVersionString.components(separatedBy: ".")
-//                if releaseVersionArray.count > 1 {
-//                    if let majorVersion = Int(releaseVersionArray[0]) {
-//                        _version.major = majorVersion
-//                    }
-//                    if let minorVersion = Int(releaseVersionArray[1]) {
-//                        _version.minor = minorVersion
-//                    }
-//                }
-//            }
-//            if let buildVersionString = info["CFBundleVersion"] as? String {
-//                if let buildVersion = Int(buildVersionString) {
-//                    _version.build = buildVersion
-//                }
-//            }
-//            
-//            return _version
         }
     }
     
