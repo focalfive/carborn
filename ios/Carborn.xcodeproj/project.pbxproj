@@ -15,6 +15,7 @@
 		652728E41E12684600B89903 /* carbornUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652728E31E12684600B89903 /* carbornUITests.swift */; };
 		6545779A1E126E1100F8E1E8 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654577991E126E1100F8E1E8 /* IntroViewController.swift */; };
 		65A14FC21E1944870035310A /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A14FC11E1944870035310A /* AppInfo.swift */; };
+		65C3842B1E1BF78C00CCE284 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C3842A1E1BF78C00CCE284 /* RealmModel.swift */; };
 		83E64DB541207FF065D8276A /* Pods_carbornUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612D1AED118D27FFFCF79BF /* Pods_carbornUITests.framework */; };
 		CF4A6ED4AE22655FA63E4F8A /* Pods_carborn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0D92470FA538C7EE7F4AA4 /* Pods_carborn.framework */; };
 		FADB0324734D4C707FE16AC5 /* Pods_carbornTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53B0F7670C46A91E632583D2 /* Pods_carbornTests.framework */; };
@@ -57,6 +58,7 @@
 		654577991E126E1100F8E1E8 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		6545779B1E12713E00F8E1E8 /* carborn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "carborn-Bridging-Header.h"; sourceTree = "<group>"; };
 		65A14FC11E1944870035310A /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppInfo.swift; path = Carborn/AppInfo.swift; sourceTree = SOURCE_ROOT; };
+		65C3842A1E1BF78C00CCE284 /* RealmModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmModel.swift; path = Carborn/RealmModel.swift; sourceTree = SOURCE_ROOT; };
 		7F47E6CC36B1368A9919E8F2 /* Pods-carborn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carborn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carborn/Pods-carborn.debug.xcconfig"; sourceTree = "<group>"; };
 		8ED8CA41C3E62483F6FFBC82 /* Pods-carbornTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbornTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carbornTests/Pods-carbornTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0D92470FA538C7EE7F4AA4 /* Pods_carborn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_carborn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +140,7 @@
 				652728CC1E12684500B89903 /* LaunchScreen.storyboard */,
 				652728CF1E12684500B89903 /* Info.plist */,
 				6545779B1E12713E00F8E1E8 /* carborn-Bridging-Header.h */,
+				65C3842A1E1BF78C00CCE284 /* RealmModel.swift */,
 			);
 			path = carborn;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 			files = (
 				6545779A1E126E1100F8E1E8 /* IntroViewController.swift in Sources */,
 				65A14FC21E1944870035310A /* AppInfo.swift in Sources */,
+				65C3842B1E1BF78C00CCE284 /* RealmModel.swift in Sources */,
 				652728C61E12684500B89903 /* MainViewController.swift in Sources */,
 				652728C41E12684500B89903 /* AppDelegate.swift in Sources */,
 			);
