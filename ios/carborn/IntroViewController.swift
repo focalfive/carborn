@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import RealmSwift
 
 class IntroViewController: UIViewController {
     
@@ -55,7 +56,13 @@ class IntroViewController: UIViewController {
                         if minVer <= appVer && appVer <= maxVer {
                             print("Version is in range")
                             if let objId = data["db_obj_id"] as? String {
-                                self.loadDatabase(id: objId)
+                                if let storedObjId = UserDefaults.standard.object(forKey: "db_obj_id") as? String,
+                                    storedObjId == objId {
+                                    print("using stored data")
+                                    self.startMain()
+                                } else {
+                                    self.loadDatabase(objId: objId)
+                                }
                             } else {
                                 self.showAlert(title: "Error", message: "Obj id not found.")
                             }
@@ -71,8 +78,8 @@ class IntroViewController: UIViewController {
         self.navigationController?.viewControllers = [MainViewController()]
     }
     
-    func loadDatabase(id: String) {
-        let url = "\(self.databaseUrl)\(id)?apiKey=\(self.databaseApiKey)"
+    func loadDatabase(objId: String) {
+        let url = "\(self.databaseUrl)\(objId)?apiKey=\(self.databaseApiKey)"
         let manager = AFHTTPSessionManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.get(url,
@@ -82,7 +89,7 @@ class IntroViewController: UIViewController {
                         let data = responseObject as! [String : Any?]
                         print(data)
                         if let cars = data["cars"] as? [[String: Any?]] {
-                            self.initDatabase(list: cars)
+                            self.initDatabase(objId: objId, list: cars)
                         } else {
                             self.showAlert(title: "Error", message: "Database error.")
                         }
@@ -97,14 +104,108 @@ class IntroViewController: UIViewController {
         alert.show()
     }
     
-    func initDatabase(list: [[String: Any]]) {
-        print("init database", list)
+    func initDatabase(objId: String, list: [[String: Any]]) {
+        for item in list {
+            print(item)
+        }
+        
+//        try! realm.write {
+//            let json = try! JSONSerialization.jsonObject(with: data, options: [])
+//            realm.create(City.self, value: json, update: true)
+//        }
+//        print("init database", list)
+        let realm = try! Realm()
+        let beforeCars = realm.objects(Car.self)
+        try! realm.write {
+            if beforeCars.count > 0 {
+                realm.delete(beforeCars)
+            }
+            let count = list.count
+            for i in 0..<count {
+                let item = list[i]
+                var parsed = self.parseCarData(data: item)
+                parsed["id"] = i
+                realm.create(Car.self, value: parsed)
+                print(parsed)
+            }
+            UserDefaults.standard.set(objId, forKey: "db_obj_id")
+        }
         self.startMain()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func parseCarData(data: [String: Any]) -> [String: Any] {
+        var parsed = [String: Any]()
+        let map: [[String: String]] = [
+            [
+                "from": "0-100",
+                "to": "zero_to_hundred",
+                "type": "float"
+            ],
+            [
+                "from": "model",
+                "to": "model",
+                "type": "string"
+            ],
+            [
+                "from": "brand",
+                "to": "brand",
+                "type": "string"
+            ]
+        ]
+        for item in map {
+            guard let from = item["from"],
+                let to = item["to"],
+                let type = item["type"] else {
+                continue
+            }
+            guard let typed = self.getValueOfType(value: data[from] as Any, type: type) else {
+                continue
+            }
+            
+            parsed[to] = typed
+        }
+        
+        return parsed
+    }
+    
+    func getValueOfType(value: Any, type: String) -> Any! {
+        switch type {
+        case "string":
+            if let typed = value as? String {
+                return typed
+            }
+            break
+            
+        case "float":
+            if let typed = value as? Float {
+                return typed
+            }
+            if let typed = value as? String,
+                let numbered = Float(typed) {
+                return NSNumber(value: numbered)
+            }
+            break
+            
+        case "int":
+            if let typed = value as? Int {
+                return typed
+            }
+            if let typed = value as? String,
+                let numbered = Int(typed) {
+                return NSNumber(value: numbered)
+            }
+            break
+            
+        default:
+            return nil
+        }
+        
+        return nil
     }
     
 }

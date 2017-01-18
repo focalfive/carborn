@@ -17,16 +17,17 @@ class Car: Object {
     dynamic var display_name = ""
     dynamic var generation_name = ""
     dynamic var generation_sequence = ""
-    dynamic var year = ""
-    dynamic var price = ""
+    dynamic var year = 0
+    dynamic var price_eu = 0
+    dynamic var price_kr = 0
     dynamic var hp = ""
     dynamic var hp_at_rpm = ""
-    dynamic var torque = ""
-    dynamic var torque_from = ""
-    dynamic var torque_to = ""
+    dynamic var torque = 0.0
+    dynamic var torque_from = 0.0
+    dynamic var torque_to = 0.0
     dynamic var engine_position = ""
     dynamic var engine_layout = ""
-    dynamic var valves = ""
+    dynamic var valves = 0
     dynamic var engine_type1 = ""
     dynamic var engine_type2 = ""
     dynamic var fuel_type = ""
@@ -40,12 +41,13 @@ class Car: Object {
     dynamic var gearbox_type = ""
     dynamic var gearbox_level = ""
     dynamic var transmission_maker = ""
-    dynamic var weight = ""
-    dynamic var rejection_co2 = ""
-    dynamic var zero_to_hundred = ""
+    dynamic var weight = 0.0
+    dynamic var rejection_co2 = 0
+    dynamic var zero_to_hundred = 0.0
     dynamic var image_url = ""
     
     override static func primaryKey() -> String? {
         return "id"
     }
 }
+
