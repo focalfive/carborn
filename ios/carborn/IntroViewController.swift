@@ -123,10 +123,9 @@ class IntroViewController: UIViewController {
             let count = list.count
             for i in 0..<count {
                 let item = list[i]
-                var parsed = self.parseCarData(data: item)
-                parsed["id"] = i
-                realm.create(Car.self, value: parsed)
-                print(parsed)
+                let car = Car(data: item, id: i)
+                realm.add(car)
+                print(car)
             }
             UserDefaults.standard.set(objId, forKey: "db_obj_id")
         }
@@ -136,76 +135,6 @@ class IntroViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func parseCarData(data: [String: Any]) -> [String: Any] {
-        var parsed = [String: Any]()
-        let map: [[String: String]] = [
-            [
-                "from": "0-100",
-                "to": "zero_to_hundred",
-                "type": "float"
-            ],
-            [
-                "from": "model",
-                "to": "model",
-                "type": "string"
-            ],
-            [
-                "from": "brand",
-                "to": "brand",
-                "type": "string"
-            ]
-        ]
-        for item in map {
-            guard let from = item["from"],
-                let to = item["to"],
-                let type = item["type"] else {
-                continue
-            }
-            guard let typed = self.getValueOfType(value: data[from] as Any, type: type) else {
-                continue
-            }
-            
-            parsed[to] = typed
-        }
-        
-        return parsed
-    }
-    
-    func getValueOfType(value: Any, type: String) -> Any! {
-        switch type {
-        case "string":
-            if let typed = value as? String {
-                return typed
-            }
-            break
-            
-        case "float":
-            if let typed = value as? Float {
-                return typed
-            }
-            if let typed = value as? String,
-                let numbered = Float(typed) {
-                return NSNumber(value: numbered)
-            }
-            break
-            
-        case "int":
-            if let typed = value as? Int {
-                return typed
-            }
-            if let typed = value as? String,
-                let numbered = Int(typed) {
-                return NSNumber(value: numbered)
-            }
-            break
-            
-        default:
-            return nil
-        }
-        
-        return nil
     }
     
 }
