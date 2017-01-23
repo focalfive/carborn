@@ -9,6 +9,23 @@
 import RealmSwift
 
 class Car: Object {
+    static let map: [[String: String]] = [
+        [
+            "from": "0-100",
+            "to": "zero_to_hundred",
+            "type": "float"
+        ],
+        [
+            "from": "model",
+            "to": "model",
+            "type": "string"
+        ],
+        [
+            "from": "brand",
+            "to": "brand",
+            "type": "string"
+        ]
+    ]
     dynamic var id = 0
     dynamic var manufacturer = ""
     dynamic var brand = ""
@@ -48,6 +65,61 @@ class Car: Object {
     
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+    convenience init(data: [String: Any]) {
+        self.init()
+        for item in Car.map {
+            guard let from = item["from"],
+                let to = item["to"] else {
+                    continue
+            }
+            guard let typed = self.getValueOfType(value: data[from]) else {
+                continue
+            }
+            
+            self[to] = typed
+        }
+    }
+    
+    convenience init(data: [String: Any], id: Int) {
+        self.init(data: data)
+        self.id = id
+    }
+    
+    func getValueOfType<T>(value: T) -> Any! {
+        switch String(describing: T.self) {
+        case "String":
+            if let typed = value as? String {
+                return typed
+            }
+            break
+            
+        case "Double", "Float":
+            if let typed = value as? Float {
+                return typed
+            }
+            if let typed = value as? String,
+                let numbered = Float(typed) {
+                return NSNumber(value: numbered)
+            }
+            break
+            
+        case "Int":
+            if let typed = value as? Int {
+                return typed
+            }
+            if let typed = value as? String,
+                let numbered = Int(typed) {
+                return NSNumber(value: numbered)
+            }
+            break
+            
+        default:
+            return nil
+        }
+        
+        return nil
     }
 }
 
