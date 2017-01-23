@@ -48,17 +48,17 @@ class IntroViewController: UIViewController {
                         } else {
                             maxVer = Version.maxValue
                         }
-                        print(data)
-                        print(minVer.string)
-                        print(appVer.string)
-                        print(maxVer.string)
-                        print(maxVer.number)
+//                        print(data)
+//                        print(minVer.string)
+//                        print(appVer.string)
+//                        print(maxVer.string)
+//                        print(maxVer.number)
                         if minVer <= appVer && appVer <= maxVer {
-                            print("Version is in range")
+//                            print("Version is in range")
                             if let objId = data["db_obj_id"] as? String {
                                 if let storedObjId = UserDefaults.standard.object(forKey: "db_obj_id") as? String,
                                     storedObjId == objId {
-                                    print("using stored data")
+//                                    print("using stored data")
                                     self.startMain()
                                 } else {
                                     self.loadDatabase(objId: objId)
@@ -87,7 +87,7 @@ class IntroViewController: UIViewController {
                     progress: nil,
                     success: {(task, responseObject) -> Void in
                         let data = responseObject as! [String : Any?]
-                        print(data)
+//                        print(data)
                         if let cars = data["cars"] as? [[String: Any?]] {
                             self.initDatabase(objId: objId, list: cars)
                         } else {
@@ -106,7 +106,7 @@ class IntroViewController: UIViewController {
     
     func initDatabase(objId: String, list: [[String: Any]]) {
         for item in list {
-            print(item)
+//            print(item)
         }
         
 //        try! realm.write {
@@ -126,7 +126,6 @@ class IntroViewController: UIViewController {
                 var parsed = self.parseCarData(data: item)
                 parsed["id"] = i
                 realm.create(Car.self, value: parsed)
-                print(parsed)
             }
             UserDefaults.standard.set(objId, forKey: "db_obj_id")
         }
