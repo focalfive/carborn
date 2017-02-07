@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BrandViewController: UIViewController {
+class BrandViewController: UIViewController, UIScrollViewDelegate {
     
     static let defaultWidth: CGFloat = 300
     static let defaultMargin: CGFloat = 20
@@ -28,6 +28,8 @@ class BrandViewController: UIViewController {
             }
         }
     }
+    
+    var modelScrollView = UIScrollView()
     
     var frame: CGRect {
         get {
@@ -61,6 +63,31 @@ class BrandViewController: UIViewController {
         self.labelTitle.font = UIFont(name: "AvenirNextCondensed-UltraLight", size: 50)
         self.labelTitle.textAlignment = .center
         self.baseView.addSubview(self.labelTitle)
+        
+        let scrollViewFrame = CGRect(origin: .zero, size: frame.size)
+        self.modelScrollView.frame = scrollViewFrame
+        self.modelScrollView.clipsToBounds = false
+        self.modelScrollView.isPagingEnabled = true
+        
+        self.view.addSubview(self.modelScrollView)
+        
+        var dummyFrame = CGRect(origin: .zero, size: scrollViewFrame.size)
+        dummyFrame.origin.y = 100
+        dummyFrame.size.height = 100
+        for i in 0..<10 {
+            let label = UILabel(frame: dummyFrame)
+            label.textColor = .red
+            label.textAlignment = .center
+            label.font = UIFont(name: "AvenirNextCondensed-UltraLight", size: 30)
+            label.text = "Dummy \(i)"
+            self.modelScrollView.addSubview(label)
+            
+            dummyFrame.origin.y += dummyFrame.size.height
+        }
+        
+        let scrollSize = CGSize(width: scrollViewFrame.size.width, height: frame.size.height * 10)
+        self.modelScrollView.contentSize = scrollSize
+        self.modelScrollView.delegate = self
     }
     
     func sizeToFitViews() {
@@ -72,6 +99,11 @@ class BrandViewController: UIViewController {
         
         baseFrame.origin = .zero
         self.labelTitle.frame = baseFrame
+        
+        self.modelScrollView.frame = CGRect(origin: .zero, size: viewSize)
+        
+        let scrollSize = CGSize(width: viewSize.width, height: viewSize.height * 10)
+        self.modelScrollView.contentSize = scrollSize
     }
     
 }

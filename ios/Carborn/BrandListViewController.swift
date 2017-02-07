@@ -135,7 +135,7 @@ class BrandListViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("scroll")
+//        print("scroll")
         var offset = scrollView.contentOffset
         let offsetX = offset.x
         let size = scrollView.frame.size.width

@@ -40,7 +40,10 @@ class MainViewController: UIViewController {
     }
     
     func navigateToBrand() {
-        self.navigationController?.pushViewController(BrandListViewController(), animated: true)
+        let dummy = CrossNavigationController()
+        dummy.scrollWidth = 200
+        self.navigationController?.pushViewController(dummy, animated: true)
+//        self.navigationController?.pushViewController(BrandListViewController(), animated: true)
     }
 
     override func didReceiveMemoryWarning() {
