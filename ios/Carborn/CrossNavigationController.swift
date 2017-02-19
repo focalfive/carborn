@@ -8,9 +8,23 @@
 
 import UIKit
 
+protocol CrossNavigationControllerDelegate {
+    func navigationDidScrollToHorizontal(page: Int, offset: CGFloat)
+    func navigationDidScrollToVertical(page: Int, offset: CGFloat)
+}
+
+extension CrossNavigationControllerDelegate {
+    func navigationDidScrollToHorizontal(page: Int, offset: CGFloat) {
+        
+    }
+    func navigationDidScrollToVertical(page: Int, offset: CGFloat) {
+        
+    }
+}
+
 class CrossNavigationController: UIViewController, UIScrollViewDelegate {
     
-    var _scrollWidth: CGFloat = -1
+    private var _scrollWidth: CGFloat = -1
     var scrollWidth: CGFloat {
         get {
             return self._scrollWidth
@@ -22,7 +36,7 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    var _scrollHeight: CGFloat = -1
+    private var _scrollHeight: CGFloat = -1
     var scrollHeight: CGFloat {
         get {
             return self._scrollHeight
@@ -34,7 +48,7 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    var _viewWidth: CGFloat = -1
+    private var _viewWidth: CGFloat = -1
     var viewWidth: CGFloat {
         get {
             return self._viewWidth
@@ -46,7 +60,7 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    var _viewHeight: CGFloat = -1
+    private var _viewHeight: CGFloat = -1
     var viewHeight: CGFloat {
         get {
             return self._viewHeight
@@ -58,8 +72,50 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    var horizontalScrollView = UIScrollView()
-    var verticalScrollView = UIScrollView()
+    private var _horizontalPage = 0
+    var horizontalPage: Int {
+        get {
+            return _horizontalPage
+        }
+    }
+    
+    private var _verticalPage = 0
+    var verticalPage: Int {
+        get {
+            return _verticalPage
+        }
+    }
+    
+    private var _horizontalPageLimit = 0
+    var horizontalPageLimit: Int {
+        get {
+            return self._horizontalPageLimit
+        }
+        set {
+            self._horizontalPageLimit = newValue
+            if self._horizontalPage >= newValue {
+                self._horizontalPage = self._horizontalPage % newValue
+            }
+        }
+    }
+    
+    private var _verticalPageLimit = 0
+    var verticalPageLimit: Int {
+        get {
+            return self._verticalPageLimit
+        }
+        set {
+            self._verticalPageLimit = newValue
+            if self._verticalPage >= newValue {
+                self._verticalPage = self._verticalPage % newValue
+            }
+        }
+    }
+    
+    private var horizontalScrollView = UIScrollView()
+    private var verticalScrollView = UIScrollView()
+    var contentView = UIView()
+    var delegate: CrossNavigationControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,13 +137,18 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         var frame = CGRect.zero
         frame.size = viewSize
         
+        self.contentView.frame = frame
+        self.view.addSubview(self.contentView)
+        
         var contentSize = CGSize.zero
         contentSize.width = viewSize.width * 3
         contentSize.height = viewSize.height
         
         // Horizontal scroll veiw
-        self.horizontalScrollView.backgroundColor = .red
         self.horizontalScrollView.frame = frame
+        self.horizontalScrollView.showsVerticalScrollIndicator = false
+        self.horizontalScrollView.showsHorizontalScrollIndicator = false
+        self.horizontalScrollView.backgroundColor = UIColor.red.withAlphaComponent(0)
         self.horizontalScrollView.isPagingEnabled = true
         self.horizontalScrollView.contentSize = contentSize
         self.horizontalScrollView.contentOffset = CGPoint(x: viewSize.width, y: 0)
@@ -99,8 +160,10 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         contentSize.height = viewSize.height * 3
         
         // Vertical scroll view
-        self.verticalScrollView.backgroundColor = .blue
         self.verticalScrollView.frame = frame
+        self.verticalScrollView.showsVerticalScrollIndicator = false
+        self.verticalScrollView.showsHorizontalScrollIndicator = false
+        self.verticalScrollView.backgroundColor = UIColor.black.withAlphaComponent(0)
         self.verticalScrollView.isPagingEnabled = true
         self.verticalScrollView.contentSize = contentSize
         self.verticalScrollView.contentOffset = CGPoint(x: 0, y: viewSize.height)
@@ -117,15 +180,26 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
             let maxX = center + half
             var offset = scrollView.contentOffset
             if offset.x <= minX {
-                print("left")
                 offset.x += self.scrollWidth
+                if self.horizontalPageLimit == 0 || self.horizontalPage > 0 {
+                    self._horizontalPage -= 1
+                } else {
+                    self._horizontalPage = self.horizontalPageLimit + self.horizontalPage - 1
+                }
+                print("left\(self.horizontalPage)")
             } else if offset.x > maxX {
-                print("right")
                 offset.x -= self.scrollWidth
-            } else {
-                break;
+                if self.horizontalPageLimit == 0 || self.horizontalPage + 1 < self.horizontalPageLimit {
+                    self._horizontalPage += 1
+                } else {
+                    self._horizontalPage = (self.horizontalPage + 1) % self.horizontalPageLimit
+                }
+                print("right\(self.horizontalPage)")
             }
             scrollView.contentOffset = offset
+            if let delegate = self.delegate {
+                delegate.navigationDidScrollToHorizontal(page: self.horizontalPage, offset: (CGFloat(self.horizontalPage) * center) + offset.x - center)
+            }
             break
             
         case self.verticalScrollView:
@@ -135,15 +209,26 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
             let maxY = center + half
             var offset = scrollView.contentOffset
             if offset.y <= minY {
-                print("up")
                 offset.y += self.scrollHeight
-            } else if offset.y >= maxY {
-                print("down")
+                if self.verticalPageLimit == 0 || self.verticalPage > 0 {
+                    self._verticalPage -= 1
+                } else {
+                    self._verticalPage = self.verticalPageLimit + self.verticalPage - 1
+                }
+                print("up\(self.verticalPage)")
+            } else if offset.y > maxY {
                 offset.y -= self.scrollHeight
-            } else {
-                break;
+                if self.verticalPageLimit == 0 || self.verticalPage + 1 < self.verticalPageLimit {
+                    self._verticalPage += 1
+                } else {
+                    self._verticalPage = (self.verticalPage + 1) % self.verticalPageLimit
+                }
+                print("down\(self.verticalPage)")
             }
             scrollView.contentOffset = offset
+            if let delegate = self.delegate {
+                delegate.navigationDidScrollToVertical(page: self.verticalPage, offset: (CGFloat(self.verticalPage) * center) + offset.y - center)
+            }
             break
             
         default:
