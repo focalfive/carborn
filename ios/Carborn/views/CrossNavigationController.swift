@@ -112,6 +112,9 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    var useHorizontalPageRevers = true
+    var useVerticalPageRevers = true
+    
     private var horizontalScrollView = UIScrollView()
     private var verticalScrollView = UIScrollView()
     var contentView = UIView()
@@ -183,16 +186,20 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
                 offset.x += self.scrollWidth
                 if self.horizontalPageLimit == 0 || self.horizontalPage > 0 {
                     self._horizontalPage -= 1
-                } else {
+                } else if self.useHorizontalPageRevers {
                     self._horizontalPage = self.horizontalPageLimit + self.horizontalPage - 1
+                } else {
+                    return
                 }
                 print("left\(self.horizontalPage)")
             } else if offset.x > maxX {
                 offset.x -= self.scrollWidth
                 if self.horizontalPageLimit == 0 || self.horizontalPage + 1 < self.horizontalPageLimit {
                     self._horizontalPage += 1
-                } else {
+                } else if self.useHorizontalPageRevers {
                     self._horizontalPage = (self.horizontalPage + 1) % self.horizontalPageLimit
+                } else {
+                    return
                 }
                 print("right\(self.horizontalPage)")
             }
@@ -212,16 +219,20 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
                 offset.y += self.scrollHeight
                 if self.verticalPageLimit == 0 || self.verticalPage > 0 {
                     self._verticalPage -= 1
-                } else {
+                } else if self.useVerticalPageRevers {
                     self._verticalPage = self.verticalPageLimit + self.verticalPage - 1
+                } else {
+                    return
                 }
                 print("up\(self.verticalPage)")
             } else if offset.y > maxY {
                 offset.y -= self.scrollHeight
                 if self.verticalPageLimit == 0 || self.verticalPage + 1 < self.verticalPageLimit {
                     self._verticalPage += 1
-                } else {
+                } else if self.useVerticalPageRevers {
                     self._verticalPage = (self.verticalPage + 1) % self.verticalPageLimit
+                } else {
+                    return
                 }
                 print("down\(self.verticalPage)")
             }

@@ -1,5 +1,5 @@
 //
-//  RealmModel.swift
+//  Car.swift
 //  Carborn
 //
 //  Created by pureye4u on 04/01/2017.
