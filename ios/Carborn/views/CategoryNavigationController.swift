@@ -9,37 +9,88 @@
 import UIKit
 import RealmSwift
 
+enum Direction {
+    case vertical
+    case horizontal
+}
+
 class CategoryNavigationController: UIViewController, CrossNavigationControllerDelegate {
     
+    private var selection: [Int] = [0]
     private var _brands: [String]!
     var brands: [String] {
         get {
             if _brands == nil {
-                self._brands = []
-                let realm = try! Realm()
-                
-                let cars = realm.objects(Car.self)
-                for car in cars {
-                    let brand = car.brand
-                    if brand.characters.count < 1 {
-                        continue
-                    }
-                    guard let _ = self._brands.index(of: brand) else {
-                        self._brands.append(brand)
-                        continue
-                    }
-                }
+                self._brands = Car.brandNames()
             }
             return self._brands
         }
     }
     
-    private var hPage: Int = 0
+    private var _hPage: Int = 0
+    private var hPage: Int {
+        get {
+            return self._hPage
+        }
+        set {
+            if self._hPage != newValue {
+                let count = self.selection.count
+                let index = count - 1
+                if self.direction == .horizontal {
+                    if count > 1, newValue == 0 {
+                        self.selection.removeLast()
+                    } else {
+                        self.selection[index] = newValue
+                    }
+                } else {
+                    self.selection.append(newValue)
+                }
+                self._hPage = newValue
+                self._direction = .horizontal
+            }
+            print("Selection: \(self.selection)")
+        }
+    }
     private var hOffset: CGFloat = 0
-    private var vPage: Int = 0
+    private var _vPage: Int = 0
+    private var vPage: Int {
+        get {
+            return self._vPage
+        }
+        set {
+            if self._vPage != newValue {
+                let count = self.selection.count
+                let index = count - 1
+                if self.direction == .vertical {
+                    if newValue == 0 {
+                        self.selection.removeLast()
+                        if count == 2 {
+                            self.crossNavigationController.useHorizontalPageRevers = true
+                        }
+                    } else {
+                        self.selection[index] = newValue
+                    }
+                } else {
+                    if count == 1 {
+                        self.crossNavigationController.useHorizontalPageRevers = false
+                    }
+                    self.selection.append(newValue)
+                }
+                self._vPage = newValue
+                self._direction = .vertical
+            }
+            print("Selection: \(self.selection)")
+        }
+    }
     private var vOffset: CGFloat = 0
+    private var _direction: Direction = .horizontal
+    private var direction: Direction {
+        get {
+            return self._direction
+        }
+    }
     
-    private var views: [String: BrandView] = [:]
+    private var brandViews: [String: BrandView] = [:]
     
     private var crossNavigationController = CrossNavigationController()
     
@@ -58,11 +109,11 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
     
     func initView() {
 //        var frame = CGRect(origin: .zero, size: CGSize(width: BrandView.circleSize, height: BrandView.circleSize))
-        self.views["left"] = BrandView()
-        self.views["center"] = BrandView()
-        self.views["right"] = BrandView()
+        self.brandViews["left"] = BrandView()
+        self.brandViews["center"] = BrandView()
+        self.brandViews["right"] = BrandView()
         
-        for (_, view) in self.views {
+        for (_, view) in self.brandViews {
             self.crossNavigationController.contentView.addSubview(view)
         }
         self.setScroll(hPage: 0, hOffset: 0)
@@ -72,26 +123,30 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
         // Brand
         let viewSize = self.view.frame.size
         let width = viewSize.width
+        let height = viewSize.height
         let halfWidth = width * 0.5
-        let vRate = max(0, min(vOffset, halfWidth)) / halfWidth
+//        let vRate = max(0, min(vOffset, halfWidth)) / halfWidth
+        let vRate = max(0, min(vOffset, height)) / height
+        let vRateABS = max(0, min(abs(vOffset), height)) / height
         let scale: CGFloat = 0.7 + 0.3 * vRate
         let dX: CGFloat = width * scale
         let dY: CGFloat = -vRate * (viewSize.height - 100) * 0.5
-        var dMoveX: CGFloat = scale * hOffset - dX * CGFloat(hPage)
-        var dMoveRateX: CGFloat = abs(2 * dMoveX / dX)
-        print("dMoveRateX: \(dMoveRateX)")
-        let centerCircleScale: CGFloat = 1 + 0.5 * vRate
-        var sideCircleScale: CGFloat = 0.7 + 0.5 * vRate + 0.3 * dMoveRateX
+        let dMoveX: CGFloat = scale * hOffset - dX * CGFloat(hPage)
+        let dMoveRateX: CGFloat = abs(2 * dMoveX / dX)
+        let centerCircleScale: CGFloat = 1 + 0.5 * vRateABS
+        let sideCircleScale: CGFloat = 0.7 + 0.5 * vRate + 0.3 * dMoveRateX
         var position = CGPoint(x: halfWidth - dMoveX, y: viewSize.height * 0.5 + dY)
         var key = ""
         var title = ""
         var i = 0
+//        print("dMoveRateX: \(dMoveRateX)")
         
         // Center
         key = "center"
         i = hPage
         title = self.brands[i]
-        if let view: BrandView = self.views[key] {
+//        print(title)
+        if let view: BrandView = self.brandViews[key] {
             view.center = position
             view.circleScale = centerCircleScale
             view.title = title
@@ -102,7 +157,7 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
         key = "left"
         i = (hPage > 0 ? hPage : self.brands.count) - 1
         title = self.brands[i]
-        if let view: BrandView = self.views[key] {
+        if let view: BrandView = self.brandViews[key] {
             view.center = position
             view.circleScale = sideCircleScale
             view.title = title
@@ -113,7 +168,7 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
         key = "right"
         i = hPage + 1 < self.brands.count ? hPage + 1 : 0
         title = self.brands[i]
-        if let view: BrandView = self.views[key] {
+        if let view: BrandView = self.brandViews[key] {
             view.center = position
             view.circleScale = sideCircleScale
             view.title = title

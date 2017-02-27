@@ -61,6 +61,7 @@ class BrandView: UIView {
         self.labelTitle.frame = labelFrame
         self.labelTitle.textColor = .black
         self.labelTitle.font = UIFont(name: "AvenirNextCondensed-UltraLight", size: 50)
+//        self.labelTitle.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 50)
         self.labelTitle.textAlignment = .center
         self.addSubview(self.labelTitle)
     }

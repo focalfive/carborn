@@ -121,5 +121,42 @@ class Car: Object {
         
         return nil
     }
+    
+    static func brandNames() -> [String] {
+        var brandNames = [String]()
+        let realm = try! Realm()
+        
+        let cars = realm.objects(Car.self)
+        for car in cars {
+            let brand = car.brand
+            if brand.characters.count < 1 {
+                continue
+            }
+            guard let _ = brandNames.index(of: brand) else {
+                brandNames.append(brand)
+                continue
+            }
+        }
+        return brandNames
+    }
+    
+    static func modelNames(_ brand: String) -> [String] {
+        var modelNames = [String]()
+        let realm = try! Realm()
+        
+        let cars = realm.objects(Car.self).filter("brand = \(brand)")
+        for car in cars {
+            let model = car.model
+            if model.characters.count < 1 {
+                continue
+            }
+            guard let _ = modelNames.index(of: model) else {
+                modelNames.append(model)
+                continue
+            }
+        }
+
+        return modelNames
+    }
 }
 

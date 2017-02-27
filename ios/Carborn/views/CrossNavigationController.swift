@@ -115,6 +115,11 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
     var useHorizontalPageRevers = true
     var useVerticalPageRevers = true
     
+    var horizontalScrollBefore: CGFloat = 0
+    var verticalScrollBefore: CGFloat = 0
+    var horizontalScrollDirection = 0
+    var verticalScrollDirection = 0
+    
     private var horizontalScrollView = UIScrollView()
     private var verticalScrollView = UIScrollView()
     var contentView = UIView()
@@ -172,16 +177,28 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         self.verticalScrollView.contentOffset = CGPoint(x: 0, y: viewSize.height)
         self.verticalScrollView.delegate = self
         self.horizontalScrollView.addSubview(self.verticalScrollView)
+        // For center test
+//        let block = UIView(frame: CGRect(origin: CGPoint(x: 0, y: viewSize.height), size: viewSize))
+//        block.backgroundColor = UIColor.red.withAlphaComponent(0.25)
+//        self.verticalScrollView.addSubview(block)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var offset = scrollView.contentOffset
         switch scrollView {
         case self.horizontalScrollView:
+            if self.horizontalScrollBefore < offset.x {
+                self.horizontalScrollDirection = 1
+            } else if self.horizontalScrollBefore > offset.x {
+                self.horizontalScrollDirection = -1
+            } else {
+                self.horizontalScrollDirection = 0
+            }
+            self.horizontalScrollBefore = offset.x
             let half = self.scrollWidth * 0.5
             let center = self.viewWidth
             let minX = center - half
             let maxX = center + half
-            var offset = scrollView.contentOffset
             if offset.x <= minX {
                 offset.x += self.scrollWidth
                 if self.horizontalPageLimit == 0 || self.horizontalPage > 0 {
@@ -189,9 +206,9 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
                 } else if self.useHorizontalPageRevers {
                     self._horizontalPage = self.horizontalPageLimit + self.horizontalPage - 1
                 } else {
-                    return
+                    offset.x = minX
+                    self.horizontalScrollDirection = -1
                 }
-                print("left\(self.horizontalPage)")
             } else if offset.x > maxX {
                 offset.x -= self.scrollWidth
                 if self.horizontalPageLimit == 0 || self.horizontalPage + 1 < self.horizontalPageLimit {
@@ -199,22 +216,28 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
                 } else if self.useHorizontalPageRevers {
                     self._horizontalPage = (self.horizontalPage + 1) % self.horizontalPageLimit
                 } else {
-                    return
+                    offset.x = maxX
+                    self.horizontalScrollDirection = 1
                 }
-                print("right\(self.horizontalPage)")
             }
             scrollView.contentOffset = offset
             if let delegate = self.delegate {
                 delegate.navigationDidScrollToHorizontal(page: self.horizontalPage, offset: (CGFloat(self.horizontalPage) * center) + offset.x - center)
             }
-            break
             
         case self.verticalScrollView:
+            if self.verticalScrollBefore < offset.y {
+                self.verticalScrollDirection = 1
+            } else if self.verticalScrollBefore > offset.y {
+                self.verticalScrollDirection = -1
+            } else {
+                self.verticalScrollDirection = 0
+            }
+            self.verticalScrollBefore = offset.y
             let half = self.scrollHeight * 0.5
             let center = self.viewHeight
             let minY = center - half
             let maxY = center + half
-            var offset = scrollView.contentOffset
             if offset.y <= minY {
                 offset.y += self.scrollHeight
                 if self.verticalPageLimit == 0 || self.verticalPage > 0 {
@@ -222,9 +245,9 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
                 } else if self.useVerticalPageRevers {
                     self._verticalPage = self.verticalPageLimit + self.verticalPage - 1
                 } else {
-                    return
+                    offset.y = minY
+                    self.verticalScrollDirection = -1
                 }
-                print("up\(self.verticalPage)")
             } else if offset.y > maxY {
                 offset.y -= self.scrollHeight
                 if self.verticalPageLimit == 0 || self.verticalPage + 1 < self.verticalPageLimit {
@@ -232,19 +255,69 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
                 } else if self.useVerticalPageRevers {
                     self._verticalPage = (self.verticalPage + 1) % self.verticalPageLimit
                 } else {
-                    return
+                    offset.y = maxY
+                    self.verticalScrollDirection = 1
                 }
-                print("down\(self.verticalPage)")
             }
             scrollView.contentOffset = offset
             if let delegate = self.delegate {
                 delegate.navigationDidScrollToVertical(page: self.verticalPage, offset: (CGFloat(self.verticalPage) * center) + offset.y - center)
             }
-            break
             
         default:
             break
         }
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        switch scrollView {
+        case self.horizontalScrollView:
+            if !self.useHorizontalPageRevers {
+                if (self.horizontalScrollDirection < 0 && self.horizontalPage == 0) || (self.horizontalScrollDirection > 0 && self.horizontalPage == (self.horizontalPageLimit - 1)) {
+                    scrollView.setContentOffset(scrollView.contentOffset, animated: true)
+                    self.horizontalScrollToCenter(animated: true)
+                }
+            }
+        case self.verticalScrollView:
+            if !self.useVerticalPageRevers {
+                if (self.verticalScrollDirection < 0 && self.verticalPage == 0) || (self.verticalScrollDirection > 0 && self.verticalPage == (self.verticalPageLimit - 1)) {
+                    scrollView.setContentOffset(scrollView.contentOffset, animated: true)
+                    self.verticalScrollToCenter(animated: true)
+                }
+            }
+        default:
+            break
+        }
+        self.verticalScrollBefore = 0
+        self.verticalScrollDirection = 0
+    }
+    
+    func stopHorizontalScrollAndScrollToCenter() {
+        var offset = self.horizontalScrollView.contentOffset
+        offset.x += 1
+        self.horizontalScrollView.setContentOffset(offset, animated: false)
+        offset.x -= 1
+        self.horizontalScrollView.setContentOffset(offset, animated: false)
+        self.perform(#selector(horizontalScrollToCenter), with: nil, afterDelay: 0)
+    }
+    
+    func horizontalScrollToCenter(animated: Bool = true) {
+        let center = CGPoint(x: self.viewWidth, y: 0)
+        self.horizontalScrollView.setContentOffset(center, animated: animated)
+    }
+    
+    func stopVerticalScrollAndScrollToCenter() {
+        var offset = self.verticalScrollView.contentOffset
+        offset.y += 1
+        self.verticalScrollView.setContentOffset(offset, animated: false)
+        offset.y -= 1
+        self.verticalScrollView.setContentOffset(offset, animated: false)
+        self.perform(#selector(verticalScrollToCenter), with: nil, afterDelay: 0)
+    }
+    
+    func verticalScrollToCenter(animated: Bool = true) {
+        let center = CGPoint(x: 0, y: self.viewHeight)
+        self.verticalScrollView.setContentOffset(center, animated: animated)
     }
     
 }
