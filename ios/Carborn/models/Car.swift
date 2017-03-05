@@ -144,7 +144,7 @@ class Car: Object {
         var modelNames = [String]()
         let realm = try! Realm()
         
-        let cars = realm.objects(Car.self).filter("brand = \(brand)")
+        let cars = realm.objects(Car.self).filter("brand = '\(brand)'")
         for car in cars {
             let model = car.model
             if model.characters.count < 1 {

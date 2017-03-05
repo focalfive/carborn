@@ -77,12 +77,28 @@ class CrossNavigationController: UIViewController, UIScrollViewDelegate {
         get {
             return _horizontalPage
         }
+        set {
+            if newValue < self.horizontalPageLimit {
+                self._horizontalPage = newValue
+                if let delegate = self.delegate {
+                    delegate.navigationDidScrollToHorizontal(page: newValue, offset: (CGFloat(newValue) * self.viewWidth))
+                }
+            }
+        }
     }
     
     private var _verticalPage = 0
     var verticalPage: Int {
         get {
             return _verticalPage
+        }
+        set {
+            if newValue < self._verticalPageLimit {
+                self._verticalPage = newValue
+                if let delegate = self.delegate {
+                    delegate.navigationDidScrollToVertical(page: newValue, offset: (CGFloat(newValue) * self.viewHeight))
+                }
+            }
         }
     }
     

@@ -75,4 +75,12 @@ class BrandView: UIView {
 //        self.baseView.layer.cornerRadius = circleSize * 0.5
         self.baseView.transform = CGAffineTransform(scaleX: self.circleScale, y: self.circleScale)
     }
+    
+    func setData(center: CGPoint, circleScale: CGFloat, title: String! = nil) {
+        self.center = center
+        self.circleScale = circleScale
+        if title != nil {
+            self.title = title
+        }
+    }
 }

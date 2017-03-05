@@ -27,7 +27,8 @@ class IntroViewController: UIViewController {
         label.text = "Intro"
         self.view.addSubview(label)
         
-        self.loadAppEnv()
+//        self.loadAppEnv()
+        self.startMain()
     }
     
     func loadAppEnv() {
