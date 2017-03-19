@@ -158,5 +158,19 @@ class Car: Object {
 
         return modelNames
     }
+    
+    static func cars(_ brand: String, generation: Int! = nil) -> [Car] {
+        let modelNames = self.modelNames(brand)
+        var cars = [Car]()
+        let realm = try! Realm()
+        for model in modelNames {
+            guard let car = realm.objects(Car.self).filter("model = '\(model)'").sorted(byKeyPath: "generation_sequence", ascending: false).first else {
+                continue
+            }
+            cars.append(car)
+        }
+        
+        return cars
+    }
 }
 

@@ -50,8 +50,8 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
         }
         set {
             if self._vPage != newValue {
-                self.setSelection(direction: .vertical, page: newValue)
                 self._vPage = newValue
+                self.setSelection(direction: .vertical, page: newValue)
             }
         }
     }
@@ -160,13 +160,12 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
                 self.popSelection()
             } else {
                 self.selection[index] = page
+                self.syncData()
             }
-            self.syncData()
         } else {
             if count < self.limitDepth {
                 self._direction = direction
                 self.pushSelection(page: 1)
-                self.syncData()
             }
         }
 //        print("Selection: \(self.selection)")
@@ -181,6 +180,7 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
         case .vertical:
             self.crossNavigationController.verticalPage = page
         }
+        self.syncData()
     }
     
     func popSelection() {
@@ -189,6 +189,7 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
         guard let page = self.selection.last else {
             return
         }
+        self.syncData()
         switch self.direction {
         case .horizontal:
 //            print("reset h page to \(page) hOffset: \(self.hOffset)")
@@ -204,28 +205,40 @@ class CategoryNavigationController: UIViewController, CrossNavigationControllerD
     
     func syncData() {
         let depth = self.selection.count
-        guard let index = self.selection.last else {
+        if depth < 1 {
             return
         }
+        
         var hPages = 1
         var vPages = 1
         
+        // By depth
+        
+        // 1. brand
+        var index = self.selection[0]
         let brand = self.brands[index]
         let models = Car.modelNames(brand)
         
-        switch depth {
-        case 1:
-            print("brand: \(brand)")
+        if depth == 1 {
+            print("Brand \(index): \(brand)")
             hPages = self.brands.count
             vPages = models.count + 1
-        case 2:
-            print("model: \(index)")
-        case 3:
-            print("car: \(index)")
-        case 4:
-            print("detail: \(index)")
-        default:
-            print("none")
+        } else {
+            index = self.selection[1] - 1
+            let model = models[index]
+            let cars = Car.cars(brand)
+            
+            if depth == 2 {
+                print("Model \(index): \(model)")
+                hPages = cars.count
+                vPages = models.count + 1
+            } else {
+                index = self.selection[2] - 1
+                let car = cars[index]
+                print("Car \(index): \(car.display_name)")
+                hPages = cars.count
+                vPages = models.count + 1
+            }
         }
         self.crossNavigationController.verticalPageLimit = vPages
         self.crossNavigationController.horizontalPageLimit = hPages
