@@ -1,0 +1,6 @@
+framework module Pods_carbornTests {
+  umbrella header "Pods-carbornTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
