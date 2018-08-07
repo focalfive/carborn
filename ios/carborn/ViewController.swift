@@ -9,7 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxMoya
 import Moya
+
 
 class ViewController: UIViewController {
 
@@ -17,9 +19,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         let provider = MoyaProvider<CarService>()
-        provider.request(.brands) { result in
-            print(result)
+        provider.rx.request(.brands).subscribe { event in
+            switch event {
+            case let .success(response):
+                print(String(data: response.data, encoding: .utf8))
+            case let .error(error):
+                print(error)
+            }
+            
         }
+//        provider.request(.brands) { result in
+//            print(result)
+//        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -26,11 +26,11 @@ extension CarService: TargetType {
             return nil
         }
     }
-    var baseURL: URL { return URL(string: "https://api.mlab.com/api/1/databases/carborn/collections/cars/")! }
+    var baseURL: URL { return URL(string: "https://api.mlab.com/api/1/databases")! }
     var path: String {
         switch self {
         case .brands:
-            return ""
+            return "/carborn/collections/cars"
         }
     }
     var method: Moya.Method {
@@ -62,7 +62,7 @@ extension CarService: TargetType {
     var task: Task {
         switch self {
         case .brands:
-            return .requestPlain
+            return .requestParameters(parameters: self.parameters!, encoding: URLEncoding.default)
         }
     }
 }

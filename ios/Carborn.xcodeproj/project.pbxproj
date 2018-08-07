@@ -24,6 +24,11 @@
 		65A94580210E00930007F6B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A9457E210E00930007F6B7 /* Main.storyboard */; };
 		65A94582210E00950007F6B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A94581210E00950007F6B7 /* Assets.xcassets */; };
 		65A94585210E00950007F6B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A94583210E00950007F6B7 /* LaunchScreen.storyboard */; };
+		65F5C609211A047D00B72BF7 /* ReactiveMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F5C603211A047D00B72BF7 /* ReactiveMoya.framework */; };
+		65F5C60B211A047D00B72BF7 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F5C605211A047D00B72BF7 /* SnapKit.framework */; };
+		65F5C60C211A047D00B72BF7 /* Spring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F5C606211A047D00B72BF7 /* Spring.framework */; };
+		65F5C60D211A047D00B72BF7 /* RxMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F5C607211A047D00B72BF7 /* RxMoya.framework */; };
+		65F5C60E211A047D00B72BF7 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F5C608211A047D00B72BF7 /* SwiftyJSON.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,12 @@
 		65A94581210E00950007F6B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65A94584210E00950007F6B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65A94586210E00950007F6B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65F5C603211A047D00B72BF7 /* ReactiveMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveMoya.framework; path = Carthage/Build/iOS/ReactiveMoya.framework; sourceTree = "<group>"; };
+		65F5C604211A047D00B72BF7 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
+		65F5C605211A047D00B72BF7 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		65F5C606211A047D00B72BF7 /* Spring.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spring.framework; path = Carthage/Build/iOS/Spring.framework; sourceTree = "<group>"; };
+		65F5C607211A047D00B72BF7 /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/iOS/RxMoya.framework; sourceTree = "<group>"; };
+		65F5C608211A047D00B72BF7 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,15 +64,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F5C609211A047D00B72BF7 /* ReactiveMoya.framework in Frameworks */,
+				65F5C60B211A047D00B72BF7 /* SnapKit.framework in Frameworks */,
+				65F5C60C211A047D00B72BF7 /* Spring.framework in Frameworks */,
+				65F5C60D211A047D00B72BF7 /* RxMoya.framework in Frameworks */,
+				65F5C60E211A047D00B72BF7 /* SwiftyJSON.framework in Frameworks */,
 				6553C84B2118990C001F9A45 /* Alamofire.framework in Frameworks */,
-				6553C84D2118990C001F9A45 /* RxBlocking.framework in Frameworks */,
-				6553C84E2118990C001F9A45 /* ObjectMapper.framework in Frameworks */,
-				6553C84F2118990C001F9A45 /* Result.framework in Frameworks */,
-				6553C8502118990C001F9A45 /* ReactiveSwift.framework in Frameworks */,
 				6553C8512118990C001F9A45 /* Kingfisher.framework in Frameworks */,
 				6553C8522118990C001F9A45 /* Moya.framework in Frameworks */,
+				6553C84E2118990C001F9A45 /* ObjectMapper.framework in Frameworks */,
+				6553C8502118990C001F9A45 /* ReactiveSwift.framework in Frameworks */,
 				6553C83E2110CD87001F9A45 /* Realm.framework in Frameworks */,
 				6553C83F2110CD87001F9A45 /* RealmSwift.framework in Frameworks */,
+				6553C84F2118990C001F9A45 /* Result.framework in Frameworks */,
+				6553C84D2118990C001F9A45 /* RxBlocking.framework in Frameworks */,
 				6553C8402110CD87001F9A45 /* RxCocoa.framework in Frameworks */,
 				6553C8412110CD87001F9A45 /* RxSwift.framework in Frameworks */,
 			);
@@ -77,13 +93,19 @@
 				6553C8492118990C001F9A45 /* Kingfisher.framework */,
 				6553C84A2118990C001F9A45 /* Moya.framework */,
 				6553C8462118990B001F9A45 /* ObjectMapper.framework */,
+				65F5C603211A047D00B72BF7 /* ReactiveMoya.framework */,
 				6553C8482118990C001F9A45 /* ReactiveSwift.framework */,
-				6553C8472118990B001F9A45 /* Result.framework */,
-				6553C8452118990B001F9A45 /* RxBlocking.framework */,
 				6553C8392110CD87001F9A45 /* Realm.framework */,
 				6553C83A2110CD87001F9A45 /* RealmSwift.framework */,
+				6553C8472118990B001F9A45 /* Result.framework */,
+				6553C8452118990B001F9A45 /* RxBlocking.framework */,
 				6553C83B2110CD87001F9A45 /* RxCocoa.framework */,
+				65F5C607211A047D00B72BF7 /* RxMoya.framework */,
 				6553C83C2110CD87001F9A45 /* RxSwift.framework */,
+				65F5C604211A047D00B72BF7 /* RxTest.framework */,
+				65F5C605211A047D00B72BF7 /* SnapKit.framework */,
+				65F5C606211A047D00B72BF7 /* Spring.framework */,
+				65F5C608211A047D00B72BF7 /* SwiftyJSON.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,13 +219,18 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Moya.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveMoya.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxMoya.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Spring.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			outputPaths = (
 			);
