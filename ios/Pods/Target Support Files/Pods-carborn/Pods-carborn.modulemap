@@ -1,6 +1,0 @@
-framework module Pods_carborn {
-  umbrella header "Pods-carborn-umbrella.h"
-
-  export *
-  module * { export * }
-}
