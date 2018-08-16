@@ -1,5 +1,6 @@
 github "Alamofire/Alamofire" "4.7.3"
 github "Hearst-DD/ObjectMapper" "3.3.0"
+github "JohnEstropia/CoreStore" "5.2.0"
 github "MengTo/Spring" "1.0.5"
 github "Moya/Moya" "11.0.2"
 github "ReactiveCocoa/ReactiveSwift" "3.1.0"
