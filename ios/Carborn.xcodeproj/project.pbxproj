@@ -23,6 +23,7 @@
 		655800262125C55600D0C5E1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655800252125C55600D0C5E1 /* MainViewController.swift */; };
 		65A9457B210E00930007F6B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9457A210E00930007F6B7 /* AppDelegate.swift */; };
 		65A94582210E00950007F6B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A94581210E00950007F6B7 /* Assets.xcassets */; };
+		65D4316A213E3DE500B6A014 /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D43169213E3DE500B6A014 /* CarModel.swift */; };
 		65F5C609211A047D00B72BF7 /* ReactiveMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F5C603211A047D00B72BF7 /* ReactiveMoya.framework */; };
 		65F5C60B211A047D00B72BF7 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F5C605211A047D00B72BF7 /* SnapKit.framework */; };
 		65F5C60C211A047D00B72BF7 /* Spring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F5C606211A047D00B72BF7 /* Spring.framework */; };
@@ -49,6 +50,7 @@
 		65A9457A210E00930007F6B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65A94581210E00950007F6B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65A94586210E00950007F6B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65D43169213E3DE500B6A014 /* CarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
 		65F5C603211A047D00B72BF7 /* ReactiveMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveMoya.framework; path = Carthage/Build/iOS/ReactiveMoya.framework; sourceTree = "<group>"; };
 		65F5C604211A047D00B72BF7 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		65F5C605211A047D00B72BF7 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
@@ -155,15 +157,25 @@
 		65A94579210E00930007F6B7 /* carborn */ = {
 			isa = PBXGroup;
 			children = (
-				65A94586210E00950007F6B7 /* Info.plist */,
 				65A9457A210E00930007F6B7 /* AppDelegate.swift */,
 				65A94581210E00950007F6B7 /* Assets.xcassets */,
 				6558001C2125C1FB00D0C5E1 /* Controllers */,
+				65A94586210E00950007F6B7 /* Info.plist */,
+				65D43168213E390E00B6A014 /* Models */,
 				6558001E2125C1FB00D0C5E1 /* Services */,
 				655800202125C1FB00D0C5E1 /* Views */,
 			);
 			path = carborn;
 			sourceTree = "<group>";
+		};
+		65D43168213E390E00B6A014 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				65D43169213E3DE500B6A014 /* CarModel.swift */,
+			);
+			name = Models;
+			path = Carborn/Models;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -268,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				655800222125C1FB00D0C5E1 /* CarService.swift in Sources */,
+				65D4316A213E3DE500B6A014 /* CarModel.swift in Sources */,
 				65A9457B210E00930007F6B7 /* AppDelegate.swift in Sources */,
 				655800242125C49300D0C5E1 /* RootController.swift in Sources */,
 				655800262125C55600D0C5E1 /* MainViewController.swift in Sources */,

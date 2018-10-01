@@ -12,6 +12,8 @@ import RxCocoa
 import RxMoya
 import Moya
 import SwiftyJSON
+import ObjectMapper
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -42,10 +44,12 @@ class MainViewController: UIViewController {
                                 return
                             }
                             print("remoteVersion", remoteVersion)
-                            if let localVersion = UserDefaults.standard.value(forKey: "version") as? UInt, localVersion == remoteVersion {
+                            let localVersion = UserDefaults.standard.integer(forKey: "dataVersion")
+                            guard localVersion < remoteVersion else {
                                 print("localVersion", localVersion)
                                 // Run
                                 self?.loadData()
+                                return
                             }
                             // Update
                             self?.updataCarData(remoteVersion)
@@ -67,12 +71,43 @@ class MainViewController: UIViewController {
                     case let .success(response):
                         do {
                             let json = try JSON(data: response.data)
-                            guard let version = json[0]["version"].uInt else {
+                            guard json.count > 0 else {
+                                // No node
+                                return
+                            }
+                            let item = json[0]
+                            guard let version = item["version"].int else {
                                 // No version
                                 return
                             }
+                            let currentVersion = UserDefaults.standard.integer(forKey: "dataVersion")
+                            guard currentVersion < version else {
+                                print("Current version(\(currentVersion)) is latest version : \(version)")
+                                return
+                            }
                             print("update version to", version)
-                            print("cars count", json[0]["cars"].count)
+                            let cars = item["cars"]
+                            print("cars count", cars.count)
+                            guard cars.count > 0 else {
+                                // No cars
+                                return
+                            }
+                            let collection: [CarModel] = cars.compactMap {
+//                                print($0.1.rawValue)
+                                if let string = $0.1.rawString() {
+                                    return CarModel(JSONString: string)
+                                } else {
+                                    print("$0.1.rawString() is nil")
+                                }
+                                return nil
+                            }
+                            if collection.count > 0 {
+                                let realm = try! Realm()
+                                try! realm.write {
+                                    realm.add(collection)
+                                    UserDefaults.standard.set(version, forKey: "dataVersion")
+                                }
+                            }
                         } catch {
                             print(error)
                         }
