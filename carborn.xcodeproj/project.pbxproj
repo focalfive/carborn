@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		48DFA0D39D9F9A030CEA3BF7 /* Pods_carborn_carbornUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829DEC1B0DBED5728585E9D1 /* Pods_carborn_carbornUITests.framework */; };
 		583DE38A2ABB3A77F5DD7576 /* Pods_carbornTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE65A3D476E3E793FA023B4E /* Pods_carbornTests.framework */; };
+		65D4B61F237082C90018E33B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D4B61E237082C90018E33B /* GoogleService-Info.plist */; };
 		6F916A34EFBCC0BE01C189A0 /* Pods_carborn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E32ED0A81D2387A22EB2ADA7 /* Pods_carborn.framework */; };
 		B1490FED23702CDB00AAE416 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1490FEC23702CDB00AAE416 /* NavigationController.swift */; };
 		B1490FF023702E8000AAE416 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1490FEF23702E8000AAE416 /* MenuViewController.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		5BE228894795481E4F3C3271 /* Pods-carborn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carborn.debug.xcconfig"; path = "Target Support Files/Pods-carborn/Pods-carborn.debug.xcconfig"; sourceTree = "<group>"; };
+		65D4B61E237082C90018E33B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C67E3E58331446876857762 /* Pods-carbornTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbornTests.debug.xcconfig"; path = "Target Support Files/Pods-carbornTests/Pods-carbornTests.debug.xcconfig"; sourceTree = "<group>"; };
 		829DEC1B0DBED5728585E9D1 /* Pods_carborn_carbornUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_carborn_carbornUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD145DD132E1BCCCC3D54D9 /* Pods-carborn-carbornUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carborn-carbornUITests.debug.xcconfig"; path = "Target Support Files/Pods-carborn-carbornUITests/Pods-carborn-carbornUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		B1CB784523702B3F00D03942 /* carborn */ = {
 			isa = PBXGroup;
 			children = (
+				65D4B61E237082C90018E33B /* GoogleService-Info.plist */,
 				B1CB785423702B4100D03942 /* Info.plist */,
 				B1CB784623702B3F00D03942 /* AppDelegate.swift */,
 				B1490FEC23702CDB00AAE416 /* NavigationController.swift */,
@@ -300,6 +303,7 @@
 			files = (
 				B1CB785323702B4100D03942 /* LaunchScreen.storyboard in Resources */,
 				B1CB785023702B4100D03942 /* Assets.xcassets in Resources */,
+				65D4B61F237082C90018E33B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,7 +552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -602,7 +606,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -624,7 +628,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = slowslipper.carborn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.slowslipper.carborn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -643,7 +647,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = slowslipper.carborn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.slowslipper.carborn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -659,7 +663,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJJ7L7SWLK;
 				INFOPLIST_FILE = carbornTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -682,7 +686,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DJJ7L7SWLK;
 				INFOPLIST_FILE = carbornTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

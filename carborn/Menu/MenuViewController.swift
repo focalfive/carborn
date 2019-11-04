@@ -10,6 +10,13 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
+    var viewModel: MenuViewModel? {
+        didSet {
+            print("viewModel did set")
+            self.viewModel?.load()
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -20,6 +27,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
 }
