@@ -11,6 +11,8 @@ target 'carborn' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'Alamofire', '~> 5.0.0-rc.3'
   pod 'RealmSwift'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
 
   target 'carbornTests' do
     inherit! :search_paths
