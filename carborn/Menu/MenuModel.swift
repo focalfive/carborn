@@ -9,5 +9,6 @@
 import Foundation
 
 struct Menu: Codable {
-    
+    var name: String
+    var brand: String
 }

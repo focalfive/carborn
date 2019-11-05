@@ -7,13 +7,25 @@
 //
 
 import UIKit
+import RxSwift
 
 class MenuViewController: UIViewController {
+    
+    private var disposeBag = DisposeBag()
     
     var viewModel: MenuViewModel? {
         didSet {
             print("viewModel did set")
             self.viewModel?.load()
+            self.viewModel?.menuCollection.subscribe(onNext: { collection in
+                debugPrint(collection)
+            }, onError: { error in
+                debugPrint(error.localizedDescription)
+            }, onCompleted: {
+                debugPrint("MenuViewModel menuCollection completed")
+            }, onDisposed: {
+                debugPrint("MenuViewModel menuCollection disposed")
+            }).disposed(by: disposeBag)
         }
     }
     
