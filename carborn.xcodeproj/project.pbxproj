@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		48DFA0D39D9F9A030CEA3BF7 /* Pods_carborn_carbornUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829DEC1B0DBED5728585E9D1 /* Pods_carborn_carbornUITests.framework */; };
 		583DE38A2ABB3A77F5DD7576 /* Pods_carbornTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE65A3D476E3E793FA023B4E /* Pods_carbornTests.framework */; };
+		65494CDC23733642007DFD5C /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65494CDB23733642007DFD5C /* MenuTableViewCell.swift */; };
 		65D4B61F237082C90018E33B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D4B61E237082C90018E33B /* GoogleService-Info.plist */; };
 		6F916A34EFBCC0BE01C189A0 /* Pods_carborn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E32ED0A81D2387A22EB2ADA7 /* Pods_carborn.framework */; };
 		B1490FED23702CDB00AAE416 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1490FEC23702CDB00AAE416 /* NavigationController.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		5BE228894795481E4F3C3271 /* Pods-carborn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carborn.debug.xcconfig"; path = "Target Support Files/Pods-carborn/Pods-carborn.debug.xcconfig"; sourceTree = "<group>"; };
+		65494CDB23733642007DFD5C /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		65D4B61E237082C90018E33B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C67E3E58331446876857762 /* Pods-carbornTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carbornTests.debug.xcconfig"; path = "Target Support Files/Pods-carbornTests/Pods-carbornTests.debug.xcconfig"; sourceTree = "<group>"; };
 		829DEC1B0DBED5728585E9D1 /* Pods_carborn_carbornUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_carborn_carbornUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 				B1490FF123702E8C00AAE416 /* MenuView.swift */,
 				B1490FEF23702E8000AAE416 /* MenuViewController.swift */,
 				B1490FF323702E9400AAE416 /* MenuViewModel.swift */,
+				65494CDB23733642007DFD5C /* MenuTableViewCell.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				B1490FF423702E9400AAE416 /* MenuViewModel.swift in Sources */,
 				B1490FF223702E8C00AAE416 /* MenuView.swift in Sources */,
 				B1490FF023702E8000AAE416 /* MenuViewController.swift in Sources */,
+				65494CDC23733642007DFD5C /* MenuTableViewCell.swift in Sources */,
 				B1490FED23702CDB00AAE416 /* NavigationController.swift in Sources */,
 				B1CB784723702B3F00D03942 /* AppDelegate.swift in Sources */,
 				B1CB784923702B4000D03942 /* SceneDelegate.swift in Sources */,

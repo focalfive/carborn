@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class MenuView: UIView {
     
@@ -16,7 +17,6 @@ class MenuView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
     }
     
 }

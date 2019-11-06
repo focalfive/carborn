@@ -11,7 +11,11 @@ import Firebase
 import RxSwift
 
 protocol MenuViewModelProrocol {
+    
     var menuCollection: Observable<[Menu]> { get }
+    
+    func load()
+    
 }
 
 class MenuViewModel: NSObject, MenuViewModelProrocol {
