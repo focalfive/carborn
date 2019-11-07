@@ -47,6 +47,12 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MenuTableViewCell")
+        tableView.separatorStyle = .none
+//        tableView.separatorInset = .zero
+//        tableView.separatorColor = .black
+        tableView.backgroundColor = .black
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
             $0.center.size.equalToSuperview()
@@ -62,8 +68,18 @@ class MenuViewController: UIViewController {
 //        tableView.rx.
         viewModel.menuCollection.bind(to: tableView.rx.items(cellIdentifier: "MenuTableViewCell", cellType: UITableViewCell.self)) { (index: Int, element: Menu, cell: UITableViewCell) in
             print(element.name)
+            cell.backgroundColor = .clear
+            cell.textLabel?.textColor = .white
             cell.textLabel?.text = element.name
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 50, weight: .ultraLight)
+            cell.textLabel?.lineBreakMode = .byClipping
         }.disposed(by: disposeBag)
     }
     
+}
+
+extension MenuViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 }
