@@ -1,8 +1,8 @@
 //
-//  MenuViewController.swift
+//  SubMenuViewController.swift
 //  carborn
 //
-//  Created by jud.lee on 2019/11/04.
+//  Created by jud.lee on 2019/11/10.
 //  Copyright © 2019 jud.lee. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class MenuViewController: UIViewController {
+class SubMenuViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     private var tableView = UITableView()
@@ -73,7 +73,7 @@ class MenuViewController: UIViewController {
     
 }
 
-extension MenuViewController: UITableViewDelegate {
+extension SubMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
