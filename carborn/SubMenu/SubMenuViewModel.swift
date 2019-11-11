@@ -8,15 +8,30 @@
 
 import Foundation
 import Firebase
+import RxCocoa
 import RxSwift
 
 protocol SubMenuViewModelProrocol {
     
+    associatedtype Input
+    associatedtype Output
     
+    var input: Input { get }
+    var output: Output { get }
     
 }
 
-class SubMenuViewModel: NSObject, MenuViewModelProrocol {
+final class SubMenuViewModel: SubMenuViewModelProrocol {
+    
+    struct Input {
+        
+    }
+    struct Output {
+        let menu: Driver<[SubMenu]>
+    }
+    
+    let input: Input
+    let output: Output
     
     private var _db: Firestore?
     private var db: Firestore {
@@ -29,34 +44,39 @@ class SubMenuViewModel: NSObject, MenuViewModelProrocol {
             return db
         }
     }
-    private var menuCollectionSubject = BehaviorSubject<[Menu]>(value: [])
-    var menuCollection: Observable<[Menu]> {
+    private var id: String?
+    private var collectionSubject = BehaviorSubject<[SubMenu]>(value: [])
+    var collection: Observable<[SubMenu]> {
         get {
-            return menuCollectionSubject.asObservable()
+            return collectionSubject.asObservable()
         }
     }
     
-    override init() {
-        
+    init() {
+        input = Input()
+        output = Output(menu: collectionSubject.asDriver(onErrorJustReturn: []))
+    }
+    
+    convenience init(id: String) {
+        self.init()
+        self.id = id
     }
     
     func load() {
-        db.collection("menu").getDocuments() { [unowned self] (snapshot, error) in
-            if let error = error {
-                debugPrint(error.localizedDescription)
+        guard let id = id else {
+            return
+        }
+        db.collection("menu").document(id).getDocument { document, error in
+            if let document = document, document.exists {
+                if let json = document.data(), let obj = json["submenu"] {
+                    let data = try! JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
+                    let collection = try! JSONDecoder().decode([SubMenu].self, from: data)
+                    self.collectionSubject.onNext(collection)
+                } else {
+                    print("data is nil")
+                }
             } else {
-                let obj = snapshot!.documents.map({ document -> [String: Any] in
-                    var data = document.data()
-                    data["id"] = document.documentID
-                    return data
-                })
-                let data = try! JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
-                let collection = try! JSONDecoder().decode([Menu].self, from: data)
-                self.menuCollectionSubject.onNext(collection)
-//                for document in snapshot!.documents {
-//                    print("\(document.documentID):\(document.data())")
-//                }
-                
+                print("Document does not exist")
             }
         }
     }

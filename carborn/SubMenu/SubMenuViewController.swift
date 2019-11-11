@@ -16,7 +16,7 @@ class SubMenuViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private var tableView = UITableView()
     
-    var viewModel: MenuViewModel? {
+    var viewModel: SubMenuViewModel? {
         didSet {
             print("viewModel did set")
             if isViewLoaded {
@@ -37,7 +37,7 @@ class SubMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MenuTableViewCell")
+        tableView.register(SubMenuTableViewCell.self, forCellReuseIdentifier: "SubMenuTableViewCell")
         tableView.separatorStyle = .none
         tableView.backgroundColor = .black
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -55,16 +55,11 @@ class SubMenuViewController: UIViewController {
             return
         }
         
-        viewModel.menuCollection.bind(to: tableView.rx.items(cellIdentifier: "MenuTableViewCell", cellType: UITableViewCell.self)) { (index: Int, element: Menu, cell: UITableViewCell) in
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-            cell.textLabel?.textColor = .white
+        viewModel.collection.bind(to: tableView.rx.items(cellIdentifier: "SubMenuTableViewCell", cellType: SubMenuTableViewCell.self)) { (index: Int, element: SubMenu, cell: SubMenuTableViewCell) in
             cell.textLabel?.text = element.name
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 50, weight: .ultraLight)
-            cell.textLabel?.lineBreakMode = .byClipping
         }.disposed(by: disposeBag)
         
-        tableView.rx.modelSelected(Menu.self)
+        tableView.rx.modelSelected(SubMenu.self)
             .subscribe(onNext: { model in
                 print(model.name)
             })

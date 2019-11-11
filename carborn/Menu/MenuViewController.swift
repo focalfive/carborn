@@ -37,7 +37,7 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MenuTableViewCell")
+        tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .black
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -55,20 +55,25 @@ class MenuViewController: UIViewController {
             return
         }
         
-        viewModel.menuCollection.bind(to: tableView.rx.items(cellIdentifier: "MenuTableViewCell", cellType: UITableViewCell.self)) { (index: Int, element: Menu, cell: UITableViewCell) in
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-            cell.textLabel?.textColor = .white
+        viewModel.menuCollection.bind(to: tableView.rx.items(cellIdentifier: MenuTableViewCell.identifier, cellType: MenuTableViewCell.self)) { (index: Int, element: Menu, cell: MenuTableViewCell) in
             cell.textLabel?.text = element.name
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 50, weight: .ultraLight)
-            cell.textLabel?.lineBreakMode = .byClipping
         }.disposed(by: disposeBag)
         
         tableView.rx.modelSelected(Menu.self)
             .subscribe(onNext: { model in
                 print(model.name)
+                self.navigateToSubMenu(id: model.id)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func navigateToSubMenu(id: String) {
+        guard let navigation = navigationController else {
+            return
+        }
+        let controller = SubMenuViewController()
+        controller.viewModel = SubMenuViewModel(id: id)
+        navigation.pushViewController(controller, animated: true)
     }
     
 }
