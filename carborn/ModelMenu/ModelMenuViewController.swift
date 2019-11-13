@@ -1,8 +1,8 @@
 //
-//  MenuViewController.swift
+//  ModelMenuViewController.swift
 //  carborn
 //
-//  Created by jud.lee on 2019/11/04.
+//  Created by jud.lee on 2019/11/13.
 //  Copyright © 2019 jud.lee. All rights reserved.
 //
 
@@ -11,12 +11,12 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class MenuViewController: UIViewController {
+class ModelMenuViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     private var tableView = UITableView()
     
-    var viewModel: MenuViewModel? {
+    var viewModel: ModelMenuViewModel? {
         didSet {
             print("viewModel did set")
             if isViewLoaded {
@@ -37,7 +37,7 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
+        tableView.register(ModelMenuTableViewCell.self, forCellReuseIdentifier: ModelMenuTableViewCell.identifier)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .black
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -55,30 +55,20 @@ class MenuViewController: UIViewController {
             return
         }
         
-        viewModel.menuCollection.bind(to: tableView.rx.items(cellIdentifier: MenuTableViewCell.identifier, cellType: MenuTableViewCell.self)) { (index: Int, element: Menu, cell: MenuTableViewCell) in
+        viewModel.collection.bind(to: tableView.rx.items(cellIdentifier: ModelMenuTableViewCell.identifier, cellType: ModelMenuTableViewCell.self)) { (index: Int, element: ModelMenu, cell: ModelMenuTableViewCell) in
             cell.textLabel?.text = element.name
         }.disposed(by: disposeBag)
         
-        tableView.rx.modelSelected(Menu.self)
+        tableView.rx.modelSelected(ModelMenu.self)
             .subscribe(onNext: { model in
                 print(model.name)
-                self.navigateToSubMenu(id: model.id)
             })
             .disposed(by: disposeBag)
     }
     
-    private func navigateToSubMenu(id: String) {
-        guard let navigation = navigationController else {
-            return
-        }
-        let controller = BrandMenuViewController()
-        controller.viewModel = BrandMenuViewModel(id: id)
-        navigation.pushViewController(controller, animated: true)
-    }
-    
 }
 
-extension MenuViewController: UITableViewDelegate {
+extension ModelMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }

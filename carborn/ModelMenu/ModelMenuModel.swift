@@ -1,13 +1,13 @@
 //
-//  SubMenuModel.swift
+//  ModelMenuModel.swift
 //  carborn
 //
-//  Created by jud.lee on 2019/11/10.
+//  Created by jud.lee on 2019/11/13.
 //  Copyright © 2019 jud.lee. All rights reserved.
 //
 
 import Foundation
 
-struct SubMenu: Codable {
+struct ModelMenu: Codable {
     var name: String
 }

@@ -1,16 +1,16 @@
 //
-//  SubMenuTableViewCell.swift
+//  ModelMenuTableViewCell.swift
 //  carborn
 //
-//  Created by jud.lee on 2019/11/11.
+//  Created by jud.lee on 2019/11/13.
 //  Copyright © 2019 jud.lee. All rights reserved.
 //
 
 import UIKit
 
-class SubMenuTableViewCell: UITableViewCell {
+class ModelMenuTableViewCell: UITableViewCell {
     
-    static let identifier = "SubMenuTableViewCell"
+    static let identifier = "ModelMenuTableViewCell"
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -29,7 +29,7 @@ class SubMenuTableViewCell: UITableViewCell {
     }
     
     convenience init() {
-        self.init(style: .default, reuseIdentifier: MenuTableViewCell.identifier)
+        self.init(style: .default, reuseIdentifier: ModelMenuTableViewCell.identifier)
     }
     
 }

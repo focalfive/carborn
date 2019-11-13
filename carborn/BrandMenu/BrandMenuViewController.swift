@@ -1,8 +1,8 @@
 //
-//  SubMenuViewController.swift
+//  BrandMenuViewController.swift
 //  carborn
 //
-//  Created by jud.lee on 2019/11/10.
+//  Created by jud.lee on 2019/11/13.
 //  Copyright © 2019 jud.lee. All rights reserved.
 //
 
@@ -11,12 +11,12 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class SubMenuViewController: UIViewController {
+class BrandMenuViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     private var tableView = UITableView()
     
-    var viewModel: SubMenuViewModel? {
+    var viewModel: BrandMenuViewModel? {
         didSet {
             print("viewModel did set")
             if isViewLoaded {
@@ -37,7 +37,7 @@ class SubMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(SubMenuTableViewCell.self, forCellReuseIdentifier: "SubMenuTableViewCell")
+        tableView.register(BrandMenuTableViewCell.self, forCellReuseIdentifier: BrandMenuTableViewCell.identifier)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .black
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -55,11 +55,11 @@ class SubMenuViewController: UIViewController {
             return
         }
         
-        viewModel.collection.bind(to: tableView.rx.items(cellIdentifier: "SubMenuTableViewCell", cellType: SubMenuTableViewCell.self)) { (index: Int, element: SubMenu, cell: SubMenuTableViewCell) in
+        viewModel.collection.bind(to: tableView.rx.items(cellIdentifier: BrandMenuTableViewCell.identifier, cellType: BrandMenuTableViewCell.self)) { (index: Int, element: BrandMenu, cell: BrandMenuTableViewCell) in
             cell.textLabel?.text = element.name
         }.disposed(by: disposeBag)
         
-        tableView.rx.modelSelected(SubMenu.self)
+        tableView.rx.modelSelected(BrandMenu.self)
             .subscribe(onNext: { model in
                 print(model.name)
             })
@@ -68,7 +68,7 @@ class SubMenuViewController: UIViewController {
     
 }
 
-extension SubMenuViewController: UITableViewDelegate {
+extension BrandMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }

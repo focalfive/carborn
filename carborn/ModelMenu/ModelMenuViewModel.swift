@@ -1,8 +1,8 @@
 //
-//  SubMenuViewModel.swift
+//  ModelMenuViewModel.swift
 //  carborn
 //
-//  Created by jud.lee on 2019/11/10.
+//  Created by jud.lee on 2019/11/13.
 //  Copyright © 2019 jud.lee. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Firebase
 import RxCocoa
 import RxSwift
 
-protocol SubMenuViewModelProrocol {
+protocol ModelMenuViewModelProrocol {
     
     associatedtype Input
     associatedtype Output
@@ -21,13 +21,13 @@ protocol SubMenuViewModelProrocol {
     
 }
 
-final class SubMenuViewModel: SubMenuViewModelProrocol {
+final class ModelMenuViewModel: ModelMenuViewModelProrocol {
     
     struct Input {
         
     }
     struct Output {
-        let menu: Driver<[SubMenu]>
+        let menu: Driver<[ModelMenu]>
     }
     
     let input: Input
@@ -45,8 +45,8 @@ final class SubMenuViewModel: SubMenuViewModelProrocol {
         }
     }
     private var id: String?
-    private var collectionSubject = BehaviorSubject<[SubMenu]>(value: [])
-    var collection: Observable<[SubMenu]> {
+    private var collectionSubject = BehaviorSubject<[ModelMenu]>(value: [])
+    var collection: Observable<[ModelMenu]> {
         get {
             return collectionSubject.asObservable()
         }
@@ -70,7 +70,7 @@ final class SubMenuViewModel: SubMenuViewModelProrocol {
             if let document = document, document.exists {
                 if let json = document.data(), let obj = json["submenu"] {
                     let data = try! JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
-                    let collection = try! JSONDecoder().decode([SubMenu].self, from: data)
+                    let collection = try! JSONDecoder().decode([ModelMenu].self, from: data)
                     self.collectionSubject.onNext(collection)
                 } else {
                     print("data is nil")
@@ -82,4 +82,3 @@ final class SubMenuViewModel: SubMenuViewModelProrocol {
     }
     
 }
-
