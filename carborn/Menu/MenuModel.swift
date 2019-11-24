@@ -9,6 +9,8 @@
 import Foundation
 
 struct Menu: Codable {
-    var id: String
+//    var objectId: String
     var name: String
+    var id: String?
+    var children: [String: Menu]?
 }

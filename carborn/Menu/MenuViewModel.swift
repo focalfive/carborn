@@ -37,6 +37,19 @@ class MenuViewModel: NSObject, MenuViewModelProrocol {
             return menuCollectionSubject.asObservable()
         }
     }
+    var hasCollection: Bool {
+        get {
+            return try! menuCollectionSubject.value().count > 0
+        }
+    }
+    
+    convenience init(children: [String: Menu]) {
+        self.init()
+        let collection = children.enumerated().map { child -> Menu in
+            return child.element.value
+        }
+        self.menuCollectionSubject.onNext(collection)
+    }
     
     override init() {
         
@@ -49,7 +62,7 @@ class MenuViewModel: NSObject, MenuViewModelProrocol {
             } else {
                 let obj = snapshot!.documents.map({ document -> [String: Any] in
                     var data = document.data()
-                    data["id"] = document.documentID
+                    data["objectId"] = document.documentID
                     return data
                 })
                 let data = try! JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)

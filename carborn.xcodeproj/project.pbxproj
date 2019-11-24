@@ -17,6 +17,8 @@
 		B1490FF223702E8C00AAE416 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1490FF123702E8C00AAE416 /* MenuView.swift */; };
 		B1490FF423702E9400AAE416 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1490FF323702E9400AAE416 /* MenuViewModel.swift */; };
 		B1490FF623702E9D00AAE416 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1490FF523702E9D00AAE416 /* MenuModel.swift */; };
+		B1A9EA9C238A88E20035E3EE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A9EA9B238A88E20035E3EE /* DetailViewController.swift */; };
+		B1A9EA9E238A89370035E3EE /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A9EA9D238A89370035E3EE /* DetailViewModel.swift */; };
 		B1CB784723702B3F00D03942 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CB784623702B3F00D03942 /* AppDelegate.swift */; };
 		B1CB784923702B4000D03942 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CB784823702B4000D03942 /* SceneDelegate.swift */; };
 		B1CB784B23702B4000D03942 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CB784A23702B4000D03942 /* ViewController.swift */; };
@@ -64,6 +66,8 @@
 		B1490FF123702E8C00AAE416 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B1490FF323702E9400AAE416 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		B1490FF523702E9D00AAE416 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
+		B1A9EA9B238A88E20035E3EE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B1A9EA9D238A89370035E3EE /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B1CB784323702B3F00D03942 /* carborn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = carborn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1CB784623702B3F00D03942 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1CB784823702B4000D03942 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +135,15 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		B1A9EA9A238A88D60035E3EE /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				B1A9EA9B238A88E20035E3EE /* DetailViewController.swift */,
+				B1A9EA9D238A89370035E3EE /* DetailViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		B1CB783A23702B3F00D03942 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +169,7 @@
 		B1CB784523702B3F00D03942 /* carborn */ = {
 			isa = PBXGroup;
 			children = (
+				B1A9EA9A238A88D60035E3EE /* Detail */,
 				65D4B61E237082C90018E33B /* GoogleService-Info.plist */,
 				B1CB785423702B4100D03942 /* Info.plist */,
 				B1CB784623702B3F00D03942 /* AppDelegate.swift */,
@@ -498,8 +512,10 @@
 				B1EEBE01237BAEE800CD0673 /* BrandMenuModel.swift in Sources */,
 				B1490FF223702E8C00AAE416 /* MenuView.swift in Sources */,
 				B1EEBE03237BAEF400CD0673 /* BrandMenuViewController.swift in Sources */,
+				B1A9EA9E238A89370035E3EE /* DetailViewModel.swift in Sources */,
 				B1490FF023702E8000AAE416 /* MenuViewController.swift in Sources */,
 				B1EEBDFF237BAEDD00CD0673 /* BrandMenuTableViewCell.swift in Sources */,
+				B1A9EA9C238A88E20035E3EE /* DetailViewController.swift in Sources */,
 				B1EEBDFB237BAE6800CD0673 /* ModelMenuViewController.swift in Sources */,
 				65494CDC23733642007DFD5C /* MenuTableViewCell.swift in Sources */,
 				B1490FED23702CDB00AAE416 /* NavigationController.swift in Sources */,

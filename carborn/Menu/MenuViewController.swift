@@ -22,7 +22,10 @@ class MenuViewController: UIViewController {
             if isViewLoaded {
                 self.bindMenuViewModel()
             }
-            self.viewModel?.load()
+            
+            if let viewModel = viewModel, !viewModel.hasCollection {
+                viewModel.load()
+            }
         }
     }
     
@@ -62,17 +65,46 @@ class MenuViewController: UIViewController {
         tableView.rx.modelSelected(Menu.self)
             .subscribe(onNext: { model in
                 print(model.name)
-                self.navigateToSubMenu(id: model.id)
+                
+//                self.navigateToSubMenu(id: model.id)
+                if let id = model.id {
+                    self.navigateToDetail(id: id)
+                    return
+                }
+                
+                if let children = model.children {
+                    self.navigateToSubMenu(children: children)
+                    return
+                }
             })
             .disposed(by: disposeBag)
     }
     
-    private func navigateToSubMenu(id: String) {
+//    private func navigateToSubMenu(id: String) {
+//        guard let navigation = navigationController else {
+//            return
+//        }
+//        let controller = BrandMenuViewController()
+//        controller.viewModel = BrandMenuViewModel(id: id)
+//        navigation.pushViewController(controller, animated: true)
+//    }
+    private func navigateToSubMenu(children: [String: Menu]) {
+        print("navigateToSubMenu", children)
         guard let navigation = navigationController else {
             return
         }
-        let controller = BrandMenuViewController()
-        controller.viewModel = BrandMenuViewModel(id: id)
+        let controller = MenuViewController()
+        controller.viewModel = MenuViewModel(children: children)
+        navigation.pushViewController(controller, animated: true)
+    }
+    
+    private func navigateToDetail(id: String) {
+        print("navigateToDetail", id)
+        guard let navigation = navigationController else {
+            return
+        }
+        let controller = DetailViewController()
+        controller.id = id
         navigation.pushViewController(controller, animated: true)
     }
     
