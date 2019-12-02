@@ -105,6 +105,9 @@ class MenuViewController: UIViewController {
         }
         let controller = DetailViewController()
         controller.id = id
+        let viewModel = DetailViewModel(id: id)
+        controller.viewModel = viewModel
+        viewModel.load()
         navigation.pushViewController(controller, animated: true)
     }
     

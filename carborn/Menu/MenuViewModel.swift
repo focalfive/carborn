@@ -22,25 +22,19 @@ class MenuViewModel: NSObject, MenuViewModelProrocol {
     
     private var _db: Firestore?
     private var db: Firestore {
-        get {
-            if let db = _db {
-                return db
-            }
-            let db = Firestore.firestore()
-            _db = db
+        if let db = _db {
             return db
         }
+        let db = Firestore.firestore()
+        _db = db
+        return db
     }
     private var menuCollectionSubject = BehaviorSubject<[Menu]>(value: [])
     var menuCollection: Observable<[Menu]> {
-        get {
-            return menuCollectionSubject.asObservable()
-        }
+        return menuCollectionSubject.asObservable()
     }
     var hasCollection: Bool {
-        get {
-            return try! menuCollectionSubject.value().count > 0
-        }
+        return try! menuCollectionSubject.value().count > 0
     }
     
     convenience init(children: [String: Menu]) {
