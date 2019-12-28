@@ -49,7 +49,7 @@ class DetailViewModel: NSObject, DetailViewModelProrocol {
             return
         }
         db.collection("cars").document(id)
-            .addSnapshotListener { snapshot, error in
+            .addSnapshotListener { [unowned self] snapshot, error in
                 if let error = error {
                     debugPrint(error.localizedDescription)
                 } else {
@@ -62,6 +62,7 @@ class DetailViewModel: NSObject, DetailViewModelProrocol {
                     debugPrint("data", String(data: data, encoding: .utf8))
                     let model = try! JSONDecoder().decode(Detail.self, from: data)
                     debugPrint("model", model)
+                    self.detailModelSubject.onNext(model)
                 }
         }
     }

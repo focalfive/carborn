@@ -19,14 +19,7 @@ class DetailViewController: UIViewController {
     var viewModel: DetailViewModel? {
         didSet {
             print("viewModel did set")
-            if isViewLoaded {
-                bindViewModel()
-            }
-        }
-    }
-    var id: String? {
-        didSet {
-            label.text = id
+            bindViewModel()
         }
     }
     
@@ -42,13 +35,32 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         label.textColor = .white
+        label.numberOfLines = 0
         view.addSubview(label)
         label.snp.makeConstraints {
             $0.center.size.equalToSuperview()
         }
+        bindViewModel()
     }
     
     private func bindViewModel() {
-        
+        guard isViewLoaded else {
+            return
+        }
+        guard let viewModel = viewModel else {
+            return
+        }
+        viewModel.detailModel.subscribe(onNext: { [unowned self] model in
+            debugPrint("subscribed model", model)
+            guard let model = model else {
+                self.label.text = nil
+                return
+            }
+            let string = model.brand + "\n"
+                + model.displayName + "\n"
+                + model.generationName
+            debugPrint("string", string)
+            self.label.text = string
+        }).disposed(by: disposeBag)
     }
 }
