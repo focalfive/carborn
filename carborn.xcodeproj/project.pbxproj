@@ -20,6 +20,7 @@
 		B182299A2394E47800AFE644 /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18229992394E47800AFE644 /* DetailModel.swift */; };
 		B1A9EA9C238A88E20035E3EE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A9EA9B238A88E20035E3EE /* DetailViewController.swift */; };
 		B1A9EA9E238A89370035E3EE /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A9EA9D238A89370035E3EE /* DetailViewModel.swift */; };
+		B1BB7EB723B6F5D10092CEC4 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BB7EB623B6F5D10092CEC4 /* RootViewController.swift */; };
 		B1CB784723702B3F00D03942 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CB784623702B3F00D03942 /* AppDelegate.swift */; };
 		B1CB784923702B4000D03942 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CB784823702B4000D03942 /* SceneDelegate.swift */; };
 		B1CB784B23702B4000D03942 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CB784A23702B4000D03942 /* ViewController.swift */; };
@@ -70,6 +71,7 @@
 		B18229992394E47800AFE644 /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
 		B1A9EA9B238A88E20035E3EE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B1A9EA9D238A89370035E3EE /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		B1BB7EB623B6F5D10092CEC4 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		B1CB784323702B3F00D03942 /* carborn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = carborn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1CB784623702B3F00D03942 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1CB784823702B4000D03942 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				B1490FEE23702E6A00AAE416 /* Menu */,
 				B1EEBDEE237BADF600CD0673 /* ModelMenu */,
 				B1EEBDF3237BAE1300CD0673 /* BrandMenu */,
+				B1BB7EB623B6F5D10092CEC4 /* RootViewController.swift */,
 			);
 			path = carborn;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				B1EEBDF5237BAE4400CD0673 /* ModelMenuViewModel.swift in Sources */,
 				B1EEBDF9237BAE5E00CD0673 /* ModelMenuModel.swift in Sources */,
 				B182299A2394E47800AFE644 /* DetailModel.swift in Sources */,
+				B1BB7EB723B6F5D10092CEC4 /* RootViewController.swift in Sources */,
 				B1CB784723702B3F00D03942 /* AppDelegate.swift in Sources */,
 				B1EEBDFD237BAE9E00CD0673 /* BrandMenuViewModel.swift in Sources */,
 				B1CB784923702B4000D03942 /* SceneDelegate.swift in Sources */,
