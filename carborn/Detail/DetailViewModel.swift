@@ -57,12 +57,16 @@ class DetailViewModel: NSObject, DetailViewModelProrocol {
                         return
                     }
                     obj["id"] = snapshot?.documentID
-                    debugPrint("obj", obj)
-                    let data = try! JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
-                    debugPrint("data", String(data: data, encoding: .utf8))
-                    let model = try! JSONDecoder().decode(Detail.self, from: data)
-                    debugPrint("model", model)
-                    self.detailModelSubject.onNext(model)
+                    do {
+                        debugPrint("obj", obj)
+                        let data = try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
+                        debugPrint("data", String(data: data, encoding: .utf8))
+                        let model = try JSONDecoder().decode(Detail.self, from: data)
+                        debugPrint("model", model)
+                        self.detailModelSubject.onNext(model)
+                    } catch {
+                        debugPrint("Catched error")
+                    }
                 }
         }
     }

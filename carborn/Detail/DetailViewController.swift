@@ -34,11 +34,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .black
         label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 30, weight: .ultraLight)
         label.numberOfLines = 0
         view.addSubview(label)
         label.snp.makeConstraints {
-            $0.center.size.equalToSuperview()
+            $0.center.equalToSuperview()
+            $0.size.equalToSuperview().inset(20)
         }
         bindViewModel()
     }
@@ -53,7 +56,7 @@ class DetailViewController: UIViewController {
         viewModel.detailModel.subscribe(onNext: { [unowned self] model in
             debugPrint("subscribed model", model)
             guard let model = model else {
-                self.label.text = nil
+                self.label.text = "Error"
                 return
             }
             let string = model.brand + "\n"
@@ -63,4 +66,5 @@ class DetailViewController: UIViewController {
             self.label.text = string
         }).disposed(by: disposeBag)
     }
+    
 }

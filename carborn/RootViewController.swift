@@ -28,20 +28,20 @@ class RootViewController: UIViewController {
         
         view.addSubview(navigation.view)
         
-        let controlSize: CGFloat = 60
-        let controlMargin: CGFloat = 40
-        
-        controlButton.backgroundColor = .white
-        controlButton.layer.cornerRadius = controlSize * 0.5
-        view.addSubview(controlButton)
-        controlButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(controlMargin)
-            $0.right.equalToSuperview().inset(controlMargin)
-            $0.size.equalTo(controlSize)
-        }
-        controlButton.addTarget(self, action: #selector(buttonDidTouchDown), for: .touchDown)
-        controlButton.addTarget(self, action: #selector(buttonDidTouchUp), for: .touchUpInside)
-        controlButton.addTarget(self, action: #selector(buttonDidTouchUp), for: .touchUpOutside)
+//        let controlSize: CGFloat = 60
+//        let controlMargin: CGFloat = 40
+//
+//        controlButton.backgroundColor = .white
+//        controlButton.layer.cornerRadius = controlSize * 0.5
+//        view.addSubview(controlButton)
+//        controlButton.snp.makeConstraints {
+//            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(controlMargin)
+//            $0.right.equalToSuperview().inset(controlMargin)
+//            $0.size.equalTo(controlSize)
+//        }
+//        controlButton.addTarget(self, action: #selector(buttonDidTouchDown), for: .touchDown)
+//        controlButton.addTarget(self, action: #selector(buttonDidTouchUp), for: .touchUpInside)
+//        controlButton.addTarget(self, action: #selector(buttonDidTouchUp), for: .touchUpOutside)
     }
     
     @objc private func buttonDidTouchDown() {
